@@ -9,36 +9,55 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#0c0b10;--bg2:#14121a;--card:#1a1722;--line:#2a2633;--ink:#f6f3ee;--muted:#a49eb0;--dim:#6f6879;--accent:#ff6a3d;--accent2:#ffb547;--good:#3ddc84;--bad:#ff6b6b;color-scheme:dark}
+  :root{--bg:#0c0b10;--bg2:#14121a;--card:#1a1722;--line:#2a2633;--ink:#f6f3ee;--muted:#a49eb0;--dim:#6f6879;--accent:#ff6a3d;--accent2:#ffb547;--good:#3ddc84;--bad:#ff6b6b;--wa:#25d366;color-scheme:dark}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--ink);font-family:"Inter Tight",system-ui,sans-serif;line-height:1.5;padding:20px 16px 110px}
-  .wrap{max-width:520px;margin:0 auto}
+  body{background:var(--bg);color:var(--ink);font-family:"Inter Tight",system-ui,sans-serif;line-height:1.5;padding:20px 16px 120px}
+  .wrap{max-width:560px;margin:0 auto}
   h1{font-size:24px;font-weight:900;letter-spacing:-.02em}
-  .sub{color:var(--muted);font-size:14px;margin-bottom:18px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}
   .card h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px}
   label{display:block;font-size:13px;color:var(--muted);margin:10px 0 5px;font-weight:600}
-  label:first-of-type{margin-top:0}
   input,textarea{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--ink);font:600 16px "Inter Tight",sans-serif}
   input:focus,textarea:focus{outline:2px solid var(--accent);border-color:transparent}
-  textarea{min-height:76px;resize:vertical;font-weight:500;font-size:15px}
+  input:disabled{opacity:.6}
+  textarea{min-height:70px;resize:vertical;font-weight:500;font-size:15px}
   .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .hint{font-size:12px;color:var(--dim);margin-top:4px}
-  .btn{display:block;width:100%;border:0;border-radius:14px;padding:16px;font:800 16px "Inter Tight",sans-serif;cursor:pointer;background:linear-gradient(90deg,var(--accent),#ff8a3d);color:#1a0800}
+  .btn{display:block;width:100%;border:0;border-radius:14px;padding:15px;font:800 16px "Inter Tight",sans-serif;cursor:pointer;background:linear-gradient(90deg,var(--accent),#ff8a3d);color:#1a0800;text-align:center;text-decoration:none}
   .btn:disabled{opacity:.6}
-  .ghost{background:none;border:1px solid var(--line);color:var(--muted);padding:10px 14px;border-radius:10px;font:600 13px "Inter Tight";cursor:pointer;white-space:nowrap}
-  .bar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--bg) 30%)}
-  .bar .wrap{display:grid;gap:8px}
+  .sm{background:var(--bg2);border:1px solid var(--line);color:var(--ink);padding:9px 12px;border-radius:10px;font:700 13px "Inter Tight",sans-serif;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+  .sm.danger{color:var(--bad)}
+  .sm.wa{background:var(--wa);border-color:var(--wa);color:#04210f}
+  .tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:4px;margin-bottom:14px}
+  .tabs button{border:0;background:none;color:var(--muted);padding:10px;border-radius:10px;font:700 14px "Inter Tight",sans-serif;cursor:pointer}
+  .tabs button.on{background:var(--card);color:var(--ink)}
   .msg{font-size:14px;text-align:center;min-height:20px}
   .msg.ok{color:var(--good)} .msg.err{color:var(--bad)}
   .warn{background:rgba(255,181,71,.1);border:1px solid rgba(255,181,71,.4);color:#ffd79a;border-radius:14px;padding:12px 14px;font-size:14px;margin-bottom:14px}
-  .preview{background:linear-gradient(160deg,#221c26,#18151d);border:1px solid #3a2e33;border-radius:18px;padding:16px}
+  .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .offer{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}
+  .offer .head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .offer .code{font-size:20px;font-weight:900;letter-spacing:.08em;color:var(--accent2)}
+  .offer .price{font-weight:800;font-size:17px;white-space:nowrap}
+  .offer .price s{color:var(--dim);font-weight:600;font-size:13px;margin-right:4px}
+  .offer .who{color:var(--muted);font-size:14px}
+  .offer .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .empty{text-align:center;color:var(--muted);padding:30px 10px;border:1px dashed var(--line);border-radius:16px}
+  .search{margin-bottom:10px}
+  .preview{background:linear-gradient(160deg,#221c26,#18151d);border:1px solid #3a2e33;border-radius:16px;padding:14px}
   .preview .lbl{font-size:12px;color:var(--accent2);font-weight:700}
   .preview s{color:var(--dim);font-weight:600;text-decoration-color:var(--accent)}
-  .preview .now{font-size:40px;font-weight:900;letter-spacing:-.03em;line-height:1.1}
+  .preview .now{font-size:34px;font-weight:900;letter-spacing:-.03em;line-height:1.1}
   .preview .meta{font-size:13px;color:var(--muted);margin-top:6px}
   .preview .save{color:var(--good);font-weight:700;font-size:13px}
-  .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .codeRow{display:flex;gap:8px}
+  .codeRow input{text-transform:uppercase;letter-spacing:.08em;font-weight:800}
+  .toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:15px;font-weight:600}
+  .toggle input{width:auto;transform:scale(1.4)}
+  .bar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--bg) 30%)}
+  .bar .wrap{display:grid;gap:6px}
+  .back{background:none;border:0;color:var(--muted);font:700 14px "Inter Tight",sans-serif;cursor:pointer;margin-bottom:10px}
   a{color:var(--accent2)}
   [hidden]{display:none!important}
 </style>
@@ -58,75 +77,103 @@
     </div>
   </section>
 
-  <!-- editor -->
-  <section id="editor" hidden>
+  <section id="app" hidden>
     <div class="top">
-      <div><h1>Pricing admin</h1><p class="sub">Save → the live page updates instantly. <a href="/" target="_blank">Open page ↗</a></p></div>
-      <button class="ghost" id="logout">Log out</button>
+      <div><h1>Pricing admin</h1><p class="sub"><a href="/" target="_blank">Open page ↗</a></p></div>
+      <button class="sm" id="logout">Log out</button>
     </div>
-    <div class="warn" id="storageWarn" hidden>⚠️ Storage isn't connected yet, so changes can't be saved. In Vercel open this project → <b>Storage</b> → create <b>Upstash for Redis</b> (free) → connect it, then redeploy.</div>
+    <div class="warn" id="storageWarn" hidden>⚠️ Storage isn't connected, so nothing can be saved. In Vercel open project <b>startuptalks-pricing</b> → <b>Storage</b> → connect your <b>Turso</b> database, then redeploy.</div>
 
-    <div class="card">
-      <h2>Live preview</h2>
-      <div class="preview">
-        <div class="lbl" id="pvLabel"></div>
-        <s id="pvWas"></s>
-        <div class="now" id="pvNow"></div>
-        <div class="save" id="pvSave"></div>
-        <div class="meta" id="pvMeta"></div>
-      </div>
+    <div class="tabs"><button data-tab="codes" class="on">Client codes</button><button data-tab="settings">Default &amp; settings</button></div>
+
+    <!-- codes list -->
+    <div id="tab-codes">
+      <button class="btn" id="newBtn" style="margin-bottom:12px">+ New client code</button>
+      <input class="search" id="search" placeholder="Search code or client name">
+      <div id="list"></div>
     </div>
 
-    <form id="form" autocomplete="off">
+    <!-- default & settings -->
+    <div id="tab-settings" hidden>
       <div class="card">
-        <h2>Price &amp; offer</h2>
-        <div class="row">
-          <div><label for="originalPrice">Original price (₹)</label><input id="originalPrice" type="number" inputmode="numeric" min="0"></div>
-          <div><label for="offerPrice">Offer price (₹)</label><input id="offerPrice" type="number" inputmode="numeric" min="0"></div>
-        </div>
-        <p class="hint">Set both the same to hide the strike-through and "You save".</p>
-        <label for="offerLabel">Offer badge text</label><input id="offerLabel">
-        <label for="validTill">Offer valid till</label><input id="validTill" placeholder="e.g. Oct 30">
-        <div class="row">
-          <div><label for="advancePercent">Advance %</label><input id="advancePercent" type="number" inputmode="numeric" min="0" max="100"></div>
-          <div><label for="deliveryDays">Delivery (days)</label><input id="deliveryDays" type="number" inputmode="numeric" min="0"></div>
-        </div>
+        <h2>Page access</h2>
+        <label class="toggle">Only show pricing with a code<input type="checkbox" id="s_requireCode"></label>
+        <p class="hint">On: visitors without a code see the "Enter your offer code" screen. Off: they see the default offer below.</p>
       </div>
-
-      <div class="card">
-        <h2>Bonuses</h2>
-        <label for="bonus1">Bonus 1</label><input id="bonus1">
-        <label for="bonus2">Bonus 2</label><input id="bonus2">
-        <label for="bonus2Note">Bonus 2 note</label><input id="bonus2Note">
-      </div>
-
+      <div id="defaultForm"></div>
       <div class="card">
         <h2>Page stats</h2>
         <div class="row">
-          <div><label for="followers">Followers</label><input id="followers"></div>
-          <div><label for="reach">Reach</label><input id="reach"></div>
+          <div><label for="s_followers">Followers</label><input id="s_followers"></div>
+          <div><label for="s_reach">Reach</label><input id="s_reach"></div>
         </div>
       </div>
-
       <div class="card">
         <h2>WhatsApp</h2>
-        <label for="whatsapp">Number (with country code)</label><input id="whatsapp" inputmode="tel">
-        <label for="whatsappMessage">Pre-filled message</label><textarea id="whatsappMessage"></textarea>
-        <p class="hint"><code>{price}</code> is replaced with the offer price.</p>
+        <label for="s_whatsapp">Number (with country code)</label><input id="s_whatsapp" inputmode="tel">
+        <label for="s_whatsappMessage">Pre-filled message</label><textarea id="s_whatsappMessage"></textarea>
+        <p class="hint">The client's code is added at the end automatically, e.g. "(Code: RAHUL10)".</p>
       </div>
-    </form>
+    </div>
+
+    <!-- edit / create a code -->
+    <div id="editor" hidden>
+      <button class="back" id="backBtn">← All codes</button>
+      <h1 id="edTitle" style="margin-bottom:12px">New client code</h1>
+      <div class="card">
+        <h2>Client</h2>
+        <label for="e_code">Code</label>
+        <div class="codeRow"><input id="e_code" maxlength="32" autocomplete="off" placeholder="e.g. RAHUL10"><button class="sm" id="genBtn" type="button">🎲 Random</button></div>
+        <p class="hint">Letters, numbers and dashes. Clients type this to see their offer.</p>
+        <label for="e_clientName">Client name (optional)</label><input id="e_clientName" placeholder="Shown as “Hi Rahul, here's your personal offer”">
+      </div>
+      <div id="editForm"></div>
+    </div>
   </section>
 </div>
 
 <div class="bar" id="bar" hidden>
   <div class="wrap">
     <p class="msg" id="saveMsg"></p>
-    <button class="btn" id="save">Save &amp; publish</button>
+    <button class="btn" id="save">Save</button>
   </div>
 </div>
 
+<template id="offerFields">
+  <div class="card">
+    <h2>Live preview</h2>
+    <div class="preview">
+      <div class="lbl" data-pv="label"></div>
+      <s data-pv="was"></s>
+      <div class="now" data-pv="now"></div>
+      <div class="save" data-pv="save"></div>
+      <div class="meta" data-pv="meta"></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Price &amp; offer</h2>
+    <div class="row">
+      <div><label>Original price (₹)</label><input data-f="originalPrice" type="number" inputmode="numeric" min="0"></div>
+      <div><label>Offer price (₹)</label><input data-f="offerPrice" type="number" inputmode="numeric" min="0"></div>
+    </div>
+    <p class="hint">Set both the same to hide the strike-through and "You save".</p>
+    <label>Offer badge text</label><input data-f="offerLabel">
+    <label>Offer valid till</label><input data-f="validTill" placeholder="e.g. Oct 30">
+    <div class="row">
+      <div><label>Advance %</label><input data-f="advancePercent" type="number" inputmode="numeric" min="0" max="100"></div>
+      <div><label>Delivery (days)</label><input data-f="deliveryDays" type="number" inputmode="numeric" min="0"></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Bonuses</h2>
+    <label>Bonus 1</label><input data-f="bonus1">
+    <label>Bonus 2</label><input data-f="bonus2">
+    <label>Bonus 2 note</label><input data-f="bonus2Note">
+  </div>
+</template>
+
 <script>
-const DEFAULTS = {
+const OFFER_DEFAULTS = {
   offerLabel: "Selected Entrepreneurs Offer",
   originalPrice: 12000,
   offerPrice: 10000,
@@ -135,16 +182,20 @@ const DEFAULTS = {
   deliveryDays: 2,
   bonus1: "Facebook Posting",
   bonus2: "Collab with Business Kerala",
-  bonus2Note: "our secondary page · ~40K followers",
+  bonus2Note: "our secondary page · ~40K followers"
+};
+const SETTINGS_DEFAULTS = {
+  requireCode: true,
   followers: "1L+",
   reach: "85L+",
   whatsapp: "919207519457",
-  whatsappMessage: "Hi Startup Talks! I'm interested in the Branded Reel Promotion ({price} offer)."
+  whatsappMessage: "Hi Startup Talks! I'm interested in the Branded Reel Promotion."
 };
 const NUM = ["originalPrice", "offerPrice", "advancePercent", "deliveryDays"];
 const $ = id => document.getElementById(id);
 const inr = n => "₹" + Number(n || 0).toLocaleString("en-IN");
-let pw = "";
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+let pw = "", state = { defaults: {}, settings: {}, offers: [] }, view = "codes", editing = null;
 try { pw = sessionStorage.getItem("st_admin") || ""; } catch {}
 
 async function api(body) {
@@ -154,28 +205,99 @@ async function api(body) {
   return j;
 }
 
-function read() {
+// offer form (used for both default and per-code)
+function mountOfferForm(host) {
+  host.innerHTML = "";
+  host.appendChild($("offerFields").content.cloneNode(true));
+  host.oninput = () => preview(host);
+}
+function fillOffer(host, data) {
+  host.querySelectorAll("[data-f]").forEach(i => i.value = data[i.dataset.f] ?? "");
+  preview(host);
+}
+function readOffer(host) {
   const c = {};
-  Object.keys(DEFAULTS).forEach(k => { c[k] = NUM.includes(k) ? Number($(k).value) : $(k).value; });
+  host.querySelectorAll("[data-f]").forEach(i => c[i.dataset.f] = NUM.includes(i.dataset.f) ? Number(i.value) : i.value);
   return c;
 }
-function preview() {
-  const c = read(), save = c.originalPrice - c.offerPrice;
-  $("pvLabel").textContent = c.offerLabel;
-  $("pvWas").textContent = save > 0 ? inr(c.originalPrice) : "";
-  $("pvNow").textContent = inr(c.offerPrice);
-  $("pvSave").textContent = save > 0 ? "You save " + inr(save) : "";
-  $("pvMeta").textContent = `Valid till ${c.validTill} · ${c.advancePercent}% advance = ${inr(Math.round(c.offerPrice * c.advancePercent / 100))} · ${c.deliveryDays} days`;
+function preview(host) {
+  const c = readOffer(host), save = c.originalPrice - c.offerPrice, pv = k => host.querySelector(`[data-pv="${k}"]`);
+  pv("label").textContent = c.offerLabel;
+  pv("was").textContent = save > 0 ? inr(c.originalPrice) : "";
+  pv("now").textContent = inr(c.offerPrice);
+  pv("save").textContent = save > 0 ? "You save " + inr(save) : "";
+  pv("meta").textContent = `Valid till ${c.validTill} · ${c.advancePercent}% advance = ${inr(Math.round(c.offerPrice * c.advancePercent / 100))} · ${c.deliveryDays} days`;
+}
+mountOfferForm($("defaultForm"));
+mountOfferForm($("editForm"));
+
+function linkFor(code) { return location.origin + "/?code=" + encodeURIComponent(code); }
+
+function renderList() {
+  const q = $("search").value.trim().toLowerCase();
+  const items = state.offers.filter(o => !q || o.code.toLowerCase().includes(q) || (o.clientName || "").toLowerCase().includes(q));
+  $("list").innerHTML = items.length ? items.map(o => {
+    const save = o.originalPrice - o.offerPrice;
+    const share = "https://wa.me/?text=" + encodeURIComponent(`Here's your exclusive Startup Talks offer 👇\n${linkFor(o.code)}\nCode: ${o.code}`);
+    return `<div class="offer">
+      <div class="head"><span class="code">${esc(o.code)}</span><span class="price">${save > 0 ? `<s>${inr(o.originalPrice)}</s>` : ""}${inr(o.offerPrice)}</span></div>
+      <div class="who">${esc(o.clientName || "—")} · valid till ${esc(o.validTill || "—")}</div>
+      <div class="acts">
+        <button class="sm" data-copy="${esc(o.code)}">🔗 Copy link</button>
+        <a class="sm wa" href="${share}" target="_blank" rel="noopener">Send on WhatsApp</a>
+        <button class="sm" data-edit="${esc(o.code)}">✏️ Edit</button>
+        <button class="sm danger" data-del="${esc(o.code)}">Delete</button>
+      </div></div>`;
+  }).join("") : `<div class="empty">${state.offers.length ? "No matches." : "No client codes yet.<br>Tap “+ New client code” to create one."}</div>`;
+}
+
+function show(v) {
+  view = v;
+  $("tab-codes").hidden = v !== "codes";
+  $("tab-settings").hidden = v !== "settings";
+  $("editor").hidden = v !== "editor";
+  document.querySelector(".tabs").hidden = v === "editor";
+  document.querySelectorAll(".tabs button").forEach(b => b.classList.toggle("on", b.dataset.tab === v));
+  $("bar").hidden = v === "codes";
+  $("save").textContent = v === "settings" ? "Save default & settings" : editing ? "Save changes" : "Create code";
+  $("saveMsg").textContent = "";
+  scrollTo(0, 0);
+}
+
+function openEditor(code) {
+  editing = code || null;
+  const o = code ? state.offers.find(x => x.code === code) : null;
+  $("edTitle").textContent = code ? "Edit " + code : "New client code";
+  $("e_code").value = code || "";
+  $("e_code").disabled = !!code;
+  $("genBtn").hidden = !!code;
+  $("e_clientName").value = o?.clientName || "";
+  fillOffer($("editForm"), { ...OFFER_DEFAULTS, ...state.defaults, ...(o || {}) });
+  show("editor");
+  if (!code) $("e_code").focus();
+}
+
+function randomCode() {
+  const a = "ABCDEFGHJKMNPQRSTUVWXYZ23456789", b = new Uint32Array(6);
+  crypto.getRandomValues(b);
+  return "ST-" + [...b].map(x => a[x % a.length]).join("");
+}
+
+async function refresh() {
+  state = await api({ action: "list" });
+  fillOffer($("defaultForm"), { ...OFFER_DEFAULTS, ...state.defaults });
+  const s = { ...SETTINGS_DEFAULTS, ...state.settings };
+  $("s_requireCode").checked = !!s.requireCode;
+  ["followers", "reach", "whatsapp", "whatsappMessage"].forEach(k => $("s_" + k).value = s[k]);
+  renderList();
 }
 
 async function enter() {
-  const v = await api({ verify: true });
-  $("login").hidden = true; $("editor").hidden = false; $("bar").hidden = false;
+  const v = await api({ action: "verify" });
+  $("login").hidden = true; $("app").hidden = false;
   $("storageWarn").hidden = v.storage;
-  const live = await fetch("/api/config", { cache: "no-store" }).then(r => r.json()).catch(() => ({}));
-  const c = { ...DEFAULTS, ...live };
-  Object.keys(DEFAULTS).forEach(k => $(k).value = c[k]);
-  preview();
+  show("codes");
+  if (v.storage) await refresh(); else { fillOffer($("defaultForm"), OFFER_DEFAULTS); renderList(); }
 }
 
 $("loginBtn").onclick = async () => {
@@ -185,16 +307,55 @@ $("loginBtn").onclick = async () => {
 };
 $("pw").onkeydown = e => { if (e.key === "Enter") $("loginBtn").click(); };
 $("logout").onclick = () => { try { sessionStorage.removeItem("st_admin"); } catch {} location.reload(); };
-$("form").oninput = preview;
-$("form").onsubmit = e => e.preventDefault();
+document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => show(b.dataset.tab));
+$("newBtn").onclick = () => openEditor(null);
+$("backBtn").onclick = () => { editing = null; show("codes"); };
+$("genBtn").onclick = () => { $("e_code").value = randomCode(); };
+$("search").oninput = renderList;
+
+$("list").onclick = async e => {
+  const t = e.target.closest("button");
+  if (!t) return;
+  if (t.dataset.edit) openEditor(t.dataset.edit);
+  if (t.dataset.copy) {
+    const link = linkFor(t.dataset.copy);
+    try { await navigator.clipboard.writeText(link); t.textContent = "✓ Copied"; }
+    catch { prompt("Copy this link:", link); }
+    setTimeout(() => t.textContent = "🔗 Copy link", 1500);
+  }
+  if (t.dataset.del && confirm(`Delete code ${t.dataset.del}? The client's link will stop working.`)) {
+    try { await api({ action: "delete", code: t.dataset.del }); await refresh(); }
+    catch (err) { alert(err.message); }
+  }
+};
 
 $("save").onclick = async () => {
-  const c = read(), m = $("saveMsg"), b = $("save");
-  if (c.offerPrice > c.originalPrice) { m.className = "msg err"; m.textContent = "Offer price is higher than the original price."; return; }
+  const m = $("saveMsg"), b = $("save");
+  const fail = msg => { m.className = "msg err"; m.textContent = msg; };
   b.disabled = true; m.className = "msg"; m.textContent = "Saving…";
-  try { await api(c); m.className = "msg ok"; m.textContent = "✓ Published — the live page is updated."; }
-  catch (e) { m.className = "msg err"; m.textContent = e.message; }
-  b.disabled = false;
+  try {
+    if (view === "settings") {
+      const d = readOffer($("defaultForm"));
+      if (d.offerPrice > d.originalPrice) return fail("Offer price is higher than the original price.");
+      await api({ action: "save", code: "_default", data: d });
+      await api({ action: "save", code: "_settings", data: {
+        requireCode: $("s_requireCode").checked,
+        followers: $("s_followers").value, reach: $("s_reach").value,
+        whatsapp: $("s_whatsapp").value, whatsappMessage: $("s_whatsappMessage").value } });
+      await refresh();
+      m.className = "msg ok"; m.textContent = "✓ Saved — the live page is updated.";
+    } else {
+      const code = $("e_code").value.trim().toUpperCase();
+      if (!/^[A-Z0-9-]{3,32}$/.test(code)) return fail("Code must be 3–32 letters, numbers or dashes.");
+      const d = { ...readOffer($("editForm")), clientName: $("e_clientName").value };
+      if (d.offerPrice > d.originalPrice) return fail("Offer price is higher than the original price.");
+      await api({ action: "save", code, data: d, create: !editing });
+      await refresh();
+      editing = null; show("codes");
+      $("search").value = ""; renderList();
+    }
+  } catch (e) { fail(e.message); }
+  finally { b.disabled = false; }
 };
 
 if (pw) enter().catch(() => { pw = ""; });

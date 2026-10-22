@@ -203,12 +203,38 @@
   .sticky .btn{padding:15px 14px;font-size:15px}
 
   .cfg-pending [data-k]{visibility:hidden}
+  .hello{font-size:15px;color:var(--ink);margin-bottom:12px}
+  .hello b{color:var(--accent2)}
+  .gate{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:16px;
+    background:radial-gradient(120% 70% at 85% -10%, rgba(255,106,61,.35), transparent 60%),var(--bg)}
+  .gate[hidden]{display:none}
+  .gate .box{width:100%;max-width:400px;text-align:center}
+  .gate h2{font-size:28px;margin:14px 0 6px}
+  .gate p{color:var(--muted);font-size:15px}
+  .gate input{width:100%;margin:22px 0 12px;background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:16px;
+    color:var(--ink);font:800 22px "Inter Tight",sans-serif;text-align:center;letter-spacing:.12em;text-transform:uppercase}
+  .gate input:focus{outline:2px solid var(--accent);border-color:transparent}
+  .gate .err{color:#ff6b6b;font-size:14px;min-height:20px;margin-bottom:6px}
+  .gate .wa-link{display:inline-block;margin-top:18px;color:var(--muted);font-size:14px}
+  .gate-open{overflow:hidden}
   .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
   .reveal.in{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.badge i{animation:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body class="cfg-pending">
+
+<div class="gate" id="gate" hidden>
+  <form class="box" id="gateForm">
+    <div class="brand" style="justify-content:center"><div class="logo"><span>ST</span></div><div style="text-align:left"><b>@startuptalks</b><small>1L+ followers</small></div></div>
+    <h2>Your exclusive offer 🔒</h2>
+    <p>Enter the offer code we shared with you to see your pricing.</p>
+    <input id="gateCode" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="OFFER CODE" maxlength="32" required>
+    <div class="err" id="gateErr"></div>
+    <button class="btn" type="submit">Unlock my offer</button>
+    <a class="wa-link js-book" href="#">Don't have a code? Ask us on WhatsApp →</a>
+  </form>
+</div>
 
 <!-- ═════════════ 1. PRICE FIRST ═════════════ -->
 <header class="hero">
@@ -223,6 +249,7 @@
       </div>
     </div>
 
+    <p class="hello" id="hello" hidden>👋 Hi <b data-k="clientName"></b>, here's your personal offer</p>
     <span class="badge"><i></i><span data-k="offerLabel">Selected Entrepreneurs Offer</span></span>
     <h1>Branded <em>Reel</em><br>Promotion 🔥</h1>
     <p class="sub">Your founder story + brand journey, told as a premium reel to Kerala's most engaged startup audience.</p>
@@ -254,7 +281,6 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.3-1.5-5.2C2.2 6.6 6.6 2.2 12 2.2c2.6 0 5.1 1 6.9 2.9 1.9 1.9 2.9 4.3 2.9 6.9 0 5.4-4.4 9.8-9.8 9.8zm8.4-18.2C18.1 1.3 15.2.1 12 .1 5.5.1.2 5.4.2 11.9c0 2.1.5 4.1 1.6 5.9L.1 24l6.3-1.7c1.7.9 3.7 1.4 5.6 1.4 6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.1-3.4-8.3z"/></svg>
         I'm Interested
       </a>
-      <p class="micro">Chat with us on WhatsApp · <span data-k="advancePercent">50</span>% advance (<span data-k="advance">₹5,000</span>) to start · Ready in <span data-k="deliveryDays">2</span> days</p>
     </div>
 
     <div class="stats">
@@ -388,7 +414,7 @@ const DEFAULTS = {
   followers: "1L+",
   reach: "85L+",
   whatsapp: "919207519457",
-  whatsappMessage: "Hi Startup Talks! I'm interested in the Branded Reel Promotion ({price} offer)."
+  whatsappMessage: "Hi Startup Talks! I'm interested in the Branded Reel Promotion."
 };
 
 const RESULTS = [
@@ -424,17 +450,48 @@ const REVIEWS = [
       advance: inr(Math.round(c.offerPrice * c.advancePercent / 100)) };
     document.querySelectorAll("[data-k]").forEach(e => { if (e.dataset.k in v) e.textContent = v[e.dataset.k]; });
     document.querySelectorAll(".js-saveon").forEach(e => e.style.display = save > 0 ? "" : "none");
-    const msg = String(c.whatsappMessage || "").replace("{price}", inr(c.offerPrice));
-    const href = "https://wa.me/" + String(c.whatsapp).replace(/\D/g, "") + "?text=" + encodeURIComponent(msg);
-    document.querySelectorAll(".js-book").forEach(a => { a.href = href; a.target = "_blank"; a.rel = "noopener"; });
+    document.getElementById("hello").hidden = !c.clientName;
+    setWhatsApp(c);
     document.body.classList.remove("cfg-pending");
   }
-  let done = false;
-  const fallback = setTimeout(() => { if (!done) { done = true; render(DEFAULTS); } }, 1500);
-  fetch("/api/config", { cache: "no-store" })
-    .then(r => r.ok ? r.json() : {})
-    .catch(() => ({}))
-    .then(c => { clearTimeout(fallback); done = true; render({ ...DEFAULTS, ...c }); });
+  function setWhatsApp(c){
+    const msg = String(c.whatsappMessage || DEFAULTS.whatsappMessage) + (c.code ? " (Code: " + c.code + ")" : "");
+    const href = "https://wa.me/" + String(c.whatsapp || DEFAULTS.whatsapp).replace(/\D/g, "") + "?text=" + encodeURIComponent(msg);
+    document.querySelectorAll(".js-book").forEach(a => { a.href = href; a.target = "_blank"; a.rel = "noopener"; });
+  }
+
+  const gate = document.getElementById("gate"), gateErr = document.getElementById("gateErr"), gateCode = document.getElementById("gateCode");
+  function showGate(c, msg){
+    setWhatsApp(c);
+    gateErr.textContent = msg || "";
+    gate.hidden = false; document.body.classList.add("gate-open");
+    setTimeout(() => gateCode.focus(), 50);
+  }
+  async function load(code){
+    const url = "/api/config" + (code ? "?code=" + encodeURIComponent(code) : "");
+    const r = await fetch(url, { cache: "no-store" }).catch(() => null);
+    if (!r) return { net: true };
+    return r.json().catch(() => ({}));
+  }
+  async function open(code){
+    const c = await load(code);
+    if (c.net) { render(DEFAULTS); return; }
+    if (c.error === "not_found") { showGate(c, code ? "That code didn't work. Please check and try again." : ""); return false; }
+    if (c.locked) { showGate(c); return false; }
+    render({ ...DEFAULTS, ...c });
+    gate.hidden = true; document.body.classList.remove("gate-open");
+    return true;
+  }
+  document.getElementById("gateForm").onsubmit = async e => {
+    e.preventDefault();
+    const code = gateCode.value.trim().toUpperCase();
+    if (!code) return;
+    gateErr.textContent = "Checking…";
+    if (await open(code)) {
+      const u = new URL(location.href); u.searchParams.set("code", code); history.replaceState(null, "", u);
+    }
+  };
+  open((new URLSearchParams(location.search).get("code") || "").trim().toUpperCase());
 
   // results
   const r = document.getElementById("results");
