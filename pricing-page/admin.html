@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Startup Talks — Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0c0b10;--bg2:#14121a;--card:#1a1722;--line:#2a2633;--ink:#f6f3ee;--muted:#a49eb0;--dim:#6f6879;--accent:#ff6a3d;--accent2:#ffb547;--good:#3ddc84;--bad:#ff6b6b;color-scheme:dark}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:"Inter Tight",system-ui,sans-serif;line-height:1.5;padding:20px 16px 110px}
+  .wrap{max-width:520px;margin:0 auto}
+  h1{font-size:24px;font-weight:900;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}
+  .card h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px}
+  label{display:block;font-size:13px;color:var(--muted);margin:10px 0 5px;font-weight:600}
+  label:first-of-type{margin-top:0}
+  input,textarea{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--ink);font:600 16px "Inter Tight",sans-serif}
+  input:focus,textarea:focus{outline:2px solid var(--accent);border-color:transparent}
+  textarea{min-height:76px;resize:vertical;font-weight:500;font-size:15px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .hint{font-size:12px;color:var(--dim);margin-top:4px}
+  .btn{display:block;width:100%;border:0;border-radius:14px;padding:16px;font:800 16px "Inter Tight",sans-serif;cursor:pointer;background:linear-gradient(90deg,var(--accent),#ff8a3d);color:#1a0800}
+  .btn:disabled{opacity:.6}
+  .ghost{background:none;border:1px solid var(--line);color:var(--muted);padding:10px 14px;border-radius:10px;font:600 13px "Inter Tight";cursor:pointer;white-space:nowrap}
+  .bar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--bg) 30%)}
+  .bar .wrap{display:grid;gap:8px}
+  .msg{font-size:14px;text-align:center;min-height:20px}
+  .msg.ok{color:var(--good)} .msg.err{color:var(--bad)}
+  .warn{background:rgba(255,181,71,.1);border:1px solid rgba(255,181,71,.4);color:#ffd79a;border-radius:14px;padding:12px 14px;font-size:14px;margin-bottom:14px}
+  .preview{background:linear-gradient(160deg,#221c26,#18151d);border:1px solid #3a2e33;border-radius:18px;padding:16px}
+  .preview .lbl{font-size:12px;color:var(--accent2);font-weight:700}
+  .preview s{color:var(--dim);font-weight:600;text-decoration-color:var(--accent)}
+  .preview .now{font-size:40px;font-weight:900;letter-spacing:-.03em;line-height:1.1}
+  .preview .meta{font-size:13px;color:var(--muted);margin-top:6px}
+  .preview .save{color:var(--good);font-weight:700;font-size:13px}
+  .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  a{color:var(--accent2)}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- login -->
+  <section id="login">
+    <h1>Admin login</h1>
+    <p class="sub">Startup Talks pricing page</p>
+    <div class="card">
+      <label for="pw">Password</label>
+      <input id="pw" type="password" autocomplete="current-password">
+      <p class="msg err" id="loginMsg"></p>
+      <button class="btn" id="loginBtn">Log in</button>
+    </div>
+  </section>
+
+  <!-- editor -->
+  <section id="editor" hidden>
+    <div class="top">
+      <div><h1>Pricing admin</h1><p class="sub">Save → the live page updates instantly. <a href="/" target="_blank">Open page ↗</a></p></div>
+      <button class="ghost" id="logout">Log out</button>
+    </div>
+    <div class="warn" id="storageWarn" hidden>⚠️ Storage isn't connected yet, so changes can't be saved. In Vercel open this project → <b>Storage</b> → create <b>Upstash for Redis</b> (free) → connect it, then redeploy.</div>
+
+    <div class="card">
+      <h2>Live preview</h2>
+      <div class="preview">
+        <div class="lbl" id="pvLabel"></div>
+        <s id="pvWas"></s>
+        <div class="now" id="pvNow"></div>
+        <div class="save" id="pvSave"></div>
+        <div class="meta" id="pvMeta"></div>
+      </div>
+    </div>
+
+    <form id="form" autocomplete="off">
+      <div class="card">
+        <h2>Price &amp; offer</h2>
+        <div class="row">
+          <div><label for="originalPrice">Original price (₹)</label><input id="originalPrice" type="number" inputmode="numeric" min="0"></div>
+          <div><label for="offerPrice">Offer price (₹)</label><input id="offerPrice" type="number" inputmode="numeric" min="0"></div>
+        </div>
+        <p class="hint">Set both the same to hide the strike-through and "You save".</p>
+        <label for="offerLabel">Offer badge text</label><input id="offerLabel">
+        <label for="validTill">Offer valid till</label><input id="validTill" placeholder="e.g. Oct 30">
+        <div class="row">
+          <div><label for="advancePercent">Advance %</label><input id="advancePercent" type="number" inputmode="numeric" min="0" max="100"></div>
+          <div><label for="deliveryDays">Delivery (days)</label><input id="deliveryDays" type="number" inputmode="numeric" min="0"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Bonuses</h2>
+        <label for="bonus1">Bonus 1</label><input id="bonus1">
+        <label for="bonus2">Bonus 2</label><input id="bonus2">
+        <label for="bonus2Note">Bonus 2 note</label><input id="bonus2Note">
+      </div>
+
+      <div class="card">
+        <h2>Page stats</h2>
+        <div class="row">
+          <div><label for="followers">Followers</label><input id="followers"></div>
+          <div><label for="reach">Reach</label><input id="reach"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>WhatsApp</h2>
+        <label for="whatsapp">Number (with country code)</label><input id="whatsapp" inputmode="tel">
+        <label for="whatsappMessage">Pre-filled message</label><textarea id="whatsappMessage"></textarea>
+        <p class="hint"><code>{price}</code> is replaced with the offer price.</p>
+      </div>
+    </form>
+  </section>
+</div>
+
+<div class="bar" id="bar" hidden>
+  <div class="wrap">
+    <p class="msg" id="saveMsg"></p>
+    <button class="btn" id="save">Save &amp; publish</button>
+  </div>
+</div>
+
+<script>
+const DEFAULTS = {
+  offerLabel: "Selected Entrepreneurs Offer",
+  originalPrice: 12000,
+  offerPrice: 10000,
+  validTill: "Oct 12",
+  advancePercent: 50,
+  deliveryDays: 2,
+  bonus1: "Facebook Posting",
+  bonus2: "Collab with Business Kerala",
+  bonus2Note: "our secondary page · ~40K followers",
+  followers: "1L+",
+  reach: "85L+",
+  whatsapp: "919207519457",
+  whatsappMessage: "Hi Startup Talks! I'm interested in the Branded Reel Promotion ({price} offer)."
+};
+const NUM = ["originalPrice", "offerPrice", "advancePercent", "deliveryDays"];
+const $ = id => document.getElementById(id);
+const inr = n => "₹" + Number(n || 0).toLocaleString("en-IN");
+let pw = "";
+try { pw = sessionStorage.getItem("st_admin") || ""; } catch {}
+
+async function api(body) {
+  const r = await fetch("/api/config", { method: "POST", headers: { "Content-Type": "application/json", "x-admin-password": pw }, body: JSON.stringify(body) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || "Request failed");
+  return j;
+}
+
+function read() {
+  const c = {};
+  Object.keys(DEFAULTS).forEach(k => { c[k] = NUM.includes(k) ? Number($(k).value) : $(k).value; });
+  return c;
+}
+function preview() {
+  const c = read(), save = c.originalPrice - c.offerPrice;
+  $("pvLabel").textContent = c.offerLabel;
+  $("pvWas").textContent = save > 0 ? inr(c.originalPrice) : "";
+  $("pvNow").textContent = inr(c.offerPrice);
+  $("pvSave").textContent = save > 0 ? "You save " + inr(save) : "";
+  $("pvMeta").textContent = `Valid till ${c.validTill} · ${c.advancePercent}% advance = ${inr(Math.round(c.offerPrice * c.advancePercent / 100))} · ${c.deliveryDays} days`;
+}
+
+async function enter() {
+  const v = await api({ verify: true });
+  $("login").hidden = true; $("editor").hidden = false; $("bar").hidden = false;
+  $("storageWarn").hidden = v.storage;
+  const live = await fetch("/api/config", { cache: "no-store" }).then(r => r.json()).catch(() => ({}));
+  const c = { ...DEFAULTS, ...live };
+  Object.keys(DEFAULTS).forEach(k => $(k).value = c[k]);
+  preview();
+}
+
+$("loginBtn").onclick = async () => {
+  pw = $("pw").value; $("loginMsg").textContent = "";
+  try { await enter(); try { sessionStorage.setItem("st_admin", pw); } catch {} }
+  catch (e) { $("loginMsg").textContent = e.message; }
+};
+$("pw").onkeydown = e => { if (e.key === "Enter") $("loginBtn").click(); };
+$("logout").onclick = () => { try { sessionStorage.removeItem("st_admin"); } catch {} location.reload(); };
+$("form").oninput = preview;
+$("form").onsubmit = e => e.preventDefault();
+
+$("save").onclick = async () => {
+  const c = read(), m = $("saveMsg"), b = $("save");
+  if (c.offerPrice > c.originalPrice) { m.className = "msg err"; m.textContent = "Offer price is higher than the original price."; return; }
+  b.disabled = true; m.className = "msg"; m.textContent = "Saving…";
+  try { await api(c); m.className = "msg ok"; m.textContent = "✓ Published — the live page is updated."; }
+  catch (e) { m.className = "msg err"; m.textContent = e.message; }
+  b.disabled = false;
+};
+
+if (pw) enter().catch(() => { pw = ""; });
+</script>
+</body>
+</html>

@@ -162,8 +162,6 @@
   .bigstat div{border-radius:16px;padding:14px 8px;text-align:center;background:linear-gradient(160deg,rgba(255,106,61,.16),rgba(255,106,61,.03));border:1px solid rgba(255,106,61,.25)}
   .bigstat b{display:block;font-size:24px;font-weight:900}
   .bigstat small{font-size:11.5px;color:var(--muted)}
-  .aud{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
-  .aud span{font-size:13px;padding:6px 11px;border-radius:999px;background:var(--bg2);border:1px solid var(--line)}
   .benefits{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .benefits div{display:flex;gap:9px;align-items:center;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:12px;font-size:14px;font-weight:600;line-height:1.25}
   .benefits .ic{flex:none;font-size:18px}
@@ -204,12 +202,13 @@
   .sticky .p b{display:block;font-size:20px;font-weight:900}
   .sticky .btn{padding:15px 14px;font-size:15px}
 
+  .cfg-pending [data-k]{visibility:hidden}
   .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
   .reveal.in{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.badge i{animation:none}html{scroll-behavior:auto}}
 </style>
 </head>
-<body>
+<body class="cfg-pending">
 
 <!-- ═════════════ 1. PRICE FIRST ═════════════ -->
 <header class="hero">
@@ -224,43 +223,43 @@
       </div>
     </div>
 
-    <span class="badge"><i></i>Selected Entrepreneurs Offer</span>
+    <span class="badge"><i></i><span data-k="offerLabel">Selected Entrepreneurs Offer</span></span>
     <h1>Branded <em>Reel</em><br>Promotion 🔥</h1>
     <p class="sub">Your founder story + brand journey, told as a premium reel to Kerala's most engaged startup audience.</p>
 
     <div class="price-card">
-      <div class="ribbon">SAVE ₹2,000</div>
+      <div class="ribbon js-saveon">SAVE <span data-k="save">₹2,000</span></div>
       <div class="pc-label">Founder Story + Brand Journey Reel</div>
-      <div class="was">₹12,000</div>
-      <div class="now"><b>₹10,000</b><span>one-time · all inclusive</span></div>
-      <span class="save">🥳 You save ₹2,000 + get 2 free bonuses</span>
+      <div class="was js-saveon" data-k="originalPrice">₹12,000</div>
+      <div class="now"><b data-k="offerPrice">₹10,000</b><span>one-time · all inclusive</span></div>
+      <span class="save js-saveon">🥳 You save <span data-k="save">₹2,000</span> + get 2 free bonuses</span>
 
       <div class="deadline">
         <span>⏳ Offer valid till</span>
-        <b id="till">Oct 12</b>
+        <b data-k="validTill">Oct 12</b>
       </div>
 
       <div class="bonus">
         <div>
           <span class="gift">🎁</span>
-          <p><small>Bonus 1 · Free</small>Facebook Posting</p>
+          <p><small>Bonus 1 · Free</small><span data-k="bonus1" style="color:inherit;font-weight:inherit">Facebook Posting</span></p>
         </div>
         <div>
           <span class="gift">🤝</span>
-          <p><small>Bonus 2 · Free</small>Collab with <b>Business Kerala</b> <span>(our secondary page · ~40K followers)</span></p>
+          <p><small>Bonus 2 · Free</small><span data-k="bonus2" style="color:inherit;font-weight:inherit">Collab with Business Kerala</span> <span>(<span data-k="bonus2Note">our secondary page · ~40K followers</span>)</span></p>
         </div>
       </div>
 
       <a class="btn wa js-book" href="#">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.3-1.5-5.2C2.2 6.6 6.6 2.2 12 2.2c2.6 0 5.1 1 6.9 2.9 1.9 1.9 2.9 4.3 2.9 6.9 0 5.4-4.4 9.8-9.8 9.8zm8.4-18.2C18.1 1.3 15.2.1 12 .1 5.5.1.2 5.4.2 11.9c0 2.1.5 4.1 1.6 5.9L.1 24l6.3-1.7c1.7.9 3.7 1.4 5.6 1.4 6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.1-3.4-8.3z"/></svg>
-        Book my reel at ₹10,000
+        I'm Interested
       </a>
-      <p class="micro">Pay just 50% (₹5,000) to start · Video ready in 2 days</p>
+      <p class="micro">Chat with us on WhatsApp · <span data-k="advancePercent">50</span>% advance (<span data-k="advance">₹5,000</span>) to start · Ready in <span data-k="deliveryDays">2</span> days</p>
     </div>
 
     <div class="stats">
-      <div class="stat"><b>1L+</b><small>Followers</small></div>
-      <div class="stat"><b>85L+</b><small>Accounts reached</small></div>
+      <div class="stat"><b data-k="followers">1L+</b><small>Followers</small></div>
+      <div class="stat"><b data-k="reach">85L+</b><small>Accounts reached</small></div>
       <div class="stat"><b>100+</b><small>Brands featured</small></div>
     </div>
   </div>
@@ -287,11 +286,11 @@
     <div class="eyebrow">How it works</div>
     <h2>3 steps. Zero hassle.</h2>
     <div class="steps">
-      <div class="step"><span class="num">1</span><div><b>Pay 50% advance</b><p>Just ₹5,000 to lock your slot at the offer price.</p></div></div>
+      <div class="step"><span class="num">1</span><div><b>Pay <span data-k="advancePercent">50</span>% advance</b><p>Just <span data-k="advance">₹5,000</span> to lock your slot at the offer price.</p></div></div>
       <div class="step"><span class="num">2</span><div><b>Fill a simple form</b><p>Tell us about your startup &amp; your journey — takes a few minutes.</p></div></div>
       <div class="step"><span class="num">3</span><div><b>Sit back &amp; relax</b><p>We script, edit and publish. We take care of the rest.</p></div></div>
     </div>
-    <div class="fast"><span style="font-size:22px">🎬</span><div>Your promotional video is ready <b>within 2 days</b>. No extra effort from you.</div></div>
+    <div class="fast"><span style="font-size:22px">🎬</span><div>Your promotional video is ready <b>within <span data-k="deliveryDays">2</span> days</b>. No extra effort from you.</div></div>
   </section>
 
   <!-- ═════════════ 4. PROOF: RESULTS ═════════════ -->
@@ -318,10 +317,6 @@
       <div><b>1L</b><small>Followers</small></div>
       <div><b>85L</b><small>Reach</small></div>
     </div>
-    <p class="lead ml" style="font-size:15px;margin-bottom:10px">വൈവിധ്യമാർന്നതും ഗുണമേന്മയുള്ളതുമായ ഓഡിയൻസ് ബേസ്:</p>
-    <div class="aud">
-      <span>🚀 Entrepreneurs</span><span>💰 Investors</span><span>🧠 Startup founders</span><span>💼 Corporate professionals</span><span>⭐ Influencers</span>
-    </div>
     <div class="benefits">
       <div><span class="ic">🔁</span>Continuous Engagements</div>
       <div><span class="ic">📣</span>Brand Awareness</div>
@@ -343,13 +338,13 @@
 
     <div class="vs ml">
       <div class="old">
-        <h3>പത്ര ഫീച്ചർ / അഭിമുഖം</h3>
+        <h3 style="font-family:'Inter Tight',sans-serif">Newspaper feature / Interview</h3>
         <div class="amt">₹50K – ₹1L</div>
         <ul><li>പരിമിതമായ ഇടം</li><li>പരിമിതമായ റീച്ച്</li><li>പരിമിതമായ എൻഗേജ്‌മെന്റ്</li></ul>
       </div>
       <div class="us">
         <h3>Startup Talks Reel</h3>
-        <div class="amt">₹10,000</div>
+        <div class="amt" data-k="offerPrice">₹10,000</div>
         <ul><li>കേരളം മുഴുവൻ റീച്ച്</li><li>Full Feature Company + Entrepreneur Story Video</li><li>എക്കാലവും ഷെയർ ചെയ്യാം</li></ul>
       </div>
     </div>
@@ -358,12 +353,12 @@
 
     <div class="finale">
       <p class="ml">ഞങ്ങൾ നിങ്ങളുടെ കഥ വെറുതെ പങ്കുവെക്കുകയല്ല ചെയ്യുന്നത്;<br><em>കേരളം മൊത്തം കാണുന്ന രീതിയിൽ അത് ട്രെൻഡ് ആകുന്ന പാക്കേജ് ചെയ്യുകയാണ്.</em></p>
-      <div class="recap"><s>₹12,000</s> &nbsp;<b>₹10,000</b> &nbsp;+ 2 free bonuses · till <span class="js-till">Oct 12</span></div>
+      <div class="recap"><s class="js-saveon" data-k="originalPrice">₹12,000</s> &nbsp;<b data-k="offerPrice">₹10,000</b> &nbsp;+ 2 free bonuses · till <span data-k="validTill">Oct 12</span></div>
       <a class="btn wa js-book" href="#">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2C6.6 2.2 2.2 6.6 2.2 12c0 1.9.5 3.6 1.5 5.2l-1 3.6 3.7-1c1.5.9 3.2 1.4 5 1.4h.6c5.4 0 9.8-4.4 9.8-9.8S17.4 2.2 12 2.2z"/></svg>
-        Yes — feature my story
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.3-1.5-5.2C2.2 6.6 6.6 2.2 12 2.2c2.6 0 5.1 1 6.9 2.9 1.9 1.9 2.9 4.3 2.9 6.9 0 5.4-4.4 9.8-9.8 9.8zm8.4-18.2C18.1 1.3 15.2.1 12 .1 5.5.1.2 5.4.2 11.9c0 2.1.5 4.1 1.6 5.9L.1 24l6.3-1.7c1.7.9 3.7 1.4 5.6 1.4 6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.1-3.4-8.3z"/></svg>
+        I'm Interested
       </a>
-      <p class="micro">Start with 50% advance · Ready in 2 days</p>
+      <p class="micro">Chat with us on WhatsApp · Ready in <span data-k="deliveryDays">2</span> days</p>
     </div>
   </section>
 
@@ -372,21 +367,28 @@
 
 <div class="sticky" id="sticky">
   <div class="in">
-    <div class="p"><s>₹12,000</s><b>₹10,000</b></div>
-    <a class="btn wa js-book" href="#">Book on WhatsApp</a>
+    <div class="p"><s class="js-saveon" data-k="originalPrice">₹12,000</s><b data-k="offerPrice">₹10,000</b></div>
+    <a class="btn wa js-book" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.3-1.5-5.2C2.2 6.6 6.6 2.2 12 2.2c2.6 0 5.1 1 6.9 2.9 1.9 1.9 2.9 4.3 2.9 6.9 0 5.4-4.4 9.8-9.8 9.8zm8.4-18.2C18.1 1.3 15.2.1 12 .1 5.5.1.2 5.4.2 11.9c0 2.1.5 4.1 1.6 5.9L.1 24l6.3-1.7c1.7.9 3.7 1.4 5.6 1.4 6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.1-3.4-8.3z"/></svg>I'm Interested</a>
   </div>
 </div>
 
 <script>
-/* ═════════════ CONFIG — edit here ═════════════ */
-const CONFIG = {
-  // WhatsApp number with country code, digits only, e.g. "919876543210".
-  // Leave empty to fall back to Instagram DM.
-  whatsapp: "",
-  instagram: "startuptalks",
-  // Default deadline text. Override per-share with ?till=Oct%2030 in the URL.
-  till: "Oct 12",
-  message: "Hi Startup Talks! I want to book the Branded Reel Promotion (₹10,000 offer)."
+/* ═════════════ CONFIG ═════════════
+   Defaults only — live values come from /api/config (edit them at /admin). */
+const DEFAULTS = {
+  offerLabel: "Selected Entrepreneurs Offer",
+  originalPrice: 12000,
+  offerPrice: 10000,
+  validTill: "Oct 12",
+  advancePercent: 50,
+  deliveryDays: 2,
+  bonus1: "Facebook Posting",
+  bonus2: "Collab with Business Kerala",
+  bonus2Note: "our secondary page · ~40K followers",
+  followers: "1L+",
+  reach: "85L+",
+  whatsapp: "919207519457",
+  whatsappMessage: "Hi Startup Talks! I'm interested in the Branded Reel Promotion ({price} offer)."
 };
 
 const RESULTS = [
@@ -414,16 +416,25 @@ const REVIEWS = [
 
 /* ═════════════ wiring ═════════════ */
 (function(){
-  const q = new URLSearchParams(location.search);
-  const till = (q.get("till") || CONFIG.till).slice(0,40);
-  document.getElementById("till").textContent = till;
-  document.querySelectorAll(".js-till").forEach(e => e.textContent = till);
-
-  const href = CONFIG.whatsapp
-    ? "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(CONFIG.message)
-    : "https://ig.me/m/" + CONFIG.instagram;
-  document.querySelectorAll(".js-book").forEach(a => { a.href = href; a.target = "_blank"; a.rel = "noopener"; });
-  if (!CONFIG.whatsapp) document.querySelectorAll(".sticky .js-book").forEach(a => a.textContent = "Book via Instagram DM");
+  const inr = n => "₹" + Number(n).toLocaleString("en-IN");
+  function render(c){
+    const save = c.originalPrice - c.offerPrice;
+    const v = { ...c,
+      originalPrice: inr(c.originalPrice), offerPrice: inr(c.offerPrice), save: inr(save),
+      advance: inr(Math.round(c.offerPrice * c.advancePercent / 100)) };
+    document.querySelectorAll("[data-k]").forEach(e => { if (e.dataset.k in v) e.textContent = v[e.dataset.k]; });
+    document.querySelectorAll(".js-saveon").forEach(e => e.style.display = save > 0 ? "" : "none");
+    const msg = String(c.whatsappMessage || "").replace("{price}", inr(c.offerPrice));
+    const href = "https://wa.me/" + String(c.whatsapp).replace(/\D/g, "") + "?text=" + encodeURIComponent(msg);
+    document.querySelectorAll(".js-book").forEach(a => { a.href = href; a.target = "_blank"; a.rel = "noopener"; });
+    document.body.classList.remove("cfg-pending");
+  }
+  let done = false;
+  const fallback = setTimeout(() => { if (!done) { done = true; render(DEFAULTS); } }, 1500);
+  fetch("/api/config", { cache: "no-store" })
+    .then(r => r.ok ? r.json() : {})
+    .catch(() => ({}))
+    .then(c => { clearTimeout(fallback); done = true; render({ ...DEFAULTS, ...c }); });
 
   // results
   const r = document.getElementById("results");
