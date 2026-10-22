@@ -12,6 +12,21 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;500;600;700;800&family=Inter+Tight:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<script>
+  // Design preview: ?design=1..5
+  (function(){
+    var D = {"1":["gold","Royal Gold","Playfair+Display:ital,wght@0,700;0,800;1,700"],
+             "2":["light","Clean Light","Plus+Jakarta+Sans:wght@500;600;700;800"],
+             "3":["pop","Bold Pop","Space+Grotesk:wght@500;600;700"],
+             "4":["kasavu","Kerala Kasavu","Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,700"],
+             "5":["neon","Neon Glass","Sora:wght@500;600;700;800"]};
+    var d = D[new URLSearchParams(location.search).get("design")];
+    if (!d) return;
+    document.documentElement.dataset.design = d[0];
+    window.DESIGN_PREVIEW = "Design " + new URLSearchParams(location.search).get("design") + " · " + d[1];
+    document.write('<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=' + d[2] + '&display=swap">');
+  })();
+</script>
 <style>
   /* ───────── EDIT THESE ───────── */
   /* WhatsApp number, offer deadline etc. live in the CONFIG script at the bottom. */
@@ -221,6 +236,7 @@
   .reveal.in{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.badge i{animation:none}html{scroll-behavior:auto}}
 </style>
+<link rel="stylesheet" href="/themes.css">
 </head>
 <body class="cfg-pending">
 
@@ -491,7 +507,10 @@ const REVIEWS = [
       const u = new URL(location.href); u.searchParams.set("code", code); history.replaceState(null, "", u);
     }
   };
-  open((new URLSearchParams(location.search).get("code") || "").trim().toUpperCase());
+  if (window.DESIGN_PREVIEW) {
+    render(DEFAULTS);
+    const t = document.createElement("div"); t.className = "design-tag"; t.textContent = window.DESIGN_PREVIEW; document.body.appendChild(t);
+  } else open((new URLSearchParams(location.search).get("code") || "").trim().toUpperCase());
 
   // results
   const r = document.getElementById("results");
