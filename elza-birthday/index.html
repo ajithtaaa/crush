@@ -2,125 +2,264 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>For Elzumma ❤️</title>
-<meta property="og:title" content="For Elzumma ❤️">
-<meta property="og:description" content="Tap to open 🎁">
-<meta name="theme-color" content="#fff5f3">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Psst… Elzumma 👀</title>
+<meta property="og:title" content="Psst… Elzumma 👀">
+<meta property="og:description" content="Open this. Don't ask questions 🤫">
+<meta name="theme-color" content="#ff6b9a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#fff5f3;--ink:#4a2c2f;--rose:#e0567a;--soft:#f7d6d9;--muted:#9a7b7f}
+  :root{--pink:#ff6b9a;--peach:#ffb38a;--lilac:#b78cff;--ink:#2d1630;--cream:#fffaf5}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Poppins',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;-webkit-tap-highlight-color:transparent}
-  #fx{position:fixed;inset:0;pointer-events:none;z-index:50}
+  html,body{height:100%;overflow:hidden}
+  body{font-family:'Baloo 2',system-ui,sans-serif;color:#fff;-webkit-tap-highlight-color:transparent;user-select:none;
+    background:linear-gradient(135deg,#ff6b9a,#ff9a76,#b78cff,#ff6b9a);background-size:400% 400%;animation:bg 14s ease infinite}
+  @keyframes bg{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+  #fx{position:fixed;inset:0;pointer-events:none;z-index:60}
+  .floaty{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+  .floaty span{position:absolute;bottom:-60px;animation:up linear infinite;opacity:.8}
+  @keyframes up{to{transform:translateY(-115vh) rotate(25deg)}}
 
-  /* intro */
-  #intro{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:var(--bg);transition:opacity .8s, visibility .8s;cursor:pointer;padding:16px;text-align:center}
-  #intro.gone{opacity:0;visibility:hidden}
-  .gift{font-size:96px;animation:wiggle 1.6s ease-in-out infinite}
-  @keyframes wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-8deg)}40%{transform:rotate(8deg)}60%{transform:rotate(-4deg)}80%{transform:rotate(0)}}
-  #intro p{font-size:15px;color:var(--muted);letter-spacing:.08em}
-  #intro h1{font-family:'Dancing Script',cursive;font-size:42px;color:var(--rose)}
+  /* story progress */
+  .bars{position:fixed;top:0;left:0;right:0;display:flex;gap:4px;padding:12px 12px 0;z-index:40}
+  .bars i{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.35);overflow:hidden}
+  .bars i b{display:block;height:100%;width:0;background:#fff;transition:width .4s}
+  .bars i.done b{width:100%}
 
-  main{max-width:520px;margin:0 auto;padding:0 16px 80px;text-align:center}
-  .hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 0}
-  .hero img{width:min(280px,72vw);aspect-ratio:3/4;object-fit:cover;object-position:50% 30%;border-radius:999px 999px 20px 20px;box-shadow:0 20px 50px rgba(224,86,122,.25)}
-  .hb{font-family:'Dancing Script',cursive;font-size:clamp(46px,13vw,72px);color:var(--rose);line-height:1;margin-top:26px}
-  .nm{font-size:20px;font-weight:300;letter-spacing:.2em;text-transform:uppercase;margin-top:10px}
-  .down{margin-top:34px;font-size:13px;color:var(--muted);animation:bob 2s ease-in-out infinite}
-  @keyframes bob{50%{transform:translateY(6px)}}
+  .scene{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 20px 40px;z-index:5;
+    opacity:0;visibility:hidden;transform:scale(.94);transition:opacity .5s, transform .5s, visibility .5s}
+  .scene.on{opacity:1;visibility:visible;transform:none}
+  .big{font-size:clamp(40px,12vw,64px);font-weight:800;line-height:1.05;text-shadow:0 4px 0 rgba(0,0,0,.08)}
+  .mid{font-size:clamp(22px,6.4vw,30px);font-weight:700;line-height:1.25;margin-top:10px}
+  .small{font-size:16px;opacity:.9;margin-top:10px;font-weight:500}
+  .emoji{font-size:clamp(80px,26vw,120px);line-height:1;margin-bottom:12px;display:inline-block}
+  .tap{position:fixed;bottom:22px;left:0;right:0;text-align:center;font-size:14px;opacity:.85;z-index:30;animation:pulse 1.6s infinite;pointer-events:none}
+  @keyframes pulse{50%{opacity:.35}}
 
-  .note{font-size:19px;font-weight:300;line-height:1.7;margin:70px auto;max-width:400px}
-  .note b{font-weight:500;color:var(--rose)}
-  .photo{margin:0 auto;width:min(340px,88vw)}
-  .photo img{width:100%;border-radius:18px;display:block;box-shadow:0 16px 40px rgba(74,44,47,.15)}
-  .photo figcaption{font-family:'Dancing Script',cursive;font-size:26px;color:var(--rose);margin-top:12px}
+  /* pop-in children */
+  .scene.on .p{animation:pop .6s cubic-bezier(.2,1.6,.4,1) both}
+  .scene.on .p:nth-child(2){animation-delay:.35s}.scene.on .p:nth-child(3){animation-delay:.8s}
+  .scene.on .p:nth-child(4){animation-delay:1.3s}.scene.on .p:nth-child(5){animation-delay:1.8s}
+  @keyframes pop{from{opacity:0;transform:translateY(24px) scale(.7)}}
+  .peek{animation:peek 2s ease-in-out infinite}
+  @keyframes peek{0%,100%{transform:translateX(0)}25%{transform:translateX(-14px) rotate(-6deg)}75%{transform:translateX(14px) rotate(6deg)}}
+  .shake{animation:sh .5s infinite}
+  @keyframes sh{25%{transform:rotate(-10deg)}75%{transform:rotate(10deg)}}
+  .spin{animation:spin 3s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
 
-  .end{min-height:80svh;display:flex;flex-direction:column;align-items:center;justify-content:center}
-  .end h2{font-family:'Dancing Script',cursive;font-size:clamp(40px,11vw,60px);color:var(--rose);line-height:1.1}
-  .end p{margin-top:14px;color:var(--muted);font-weight:300}
-  .heart{font-size:72px;margin-top:26px;cursor:pointer;animation:beat 1.2s infinite;user-select:none}
-  @keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.15)}30%{transform:scale(1)}45%{transform:scale(1.1)}}
+  /* loader */
+  .loader{width:min(300px,80vw);height:22px;border-radius:99px;background:rgba(255,255,255,.3);overflow:hidden;margin:22px auto 10px;border:2px solid #fff}
+  .loader b{display:block;height:100%;width:0;background:#fff;border-radius:99px;transition:width .15s}
+  .pct{font-size:22px;font-weight:800}
+  .err{margin-top:14px;background:#fff;color:#d62d5e;border-radius:16px;padding:12px 16px;font-weight:700;display:none;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+  .err.on{display:block;animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
 
-  .r{opacity:0;transform:translateY(24px);transition:opacity 1s ease,transform 1s ease}
-  .r.in{opacity:1;transform:none}
+  /* scratch */
+  .card{position:relative;width:min(300px,78vw);aspect-ratio:3/4;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.25);margin-top:16px;border:5px solid #fff}
+  .card img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block}
+  .card canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}
+  .hbd{font-family:'Caveat',cursive;font-size:clamp(48px,14vw,72px);line-height:1;margin-top:14px;opacity:0;transform:scale(.5);transition:all .7s cubic-bezier(.2,1.6,.4,1)}
+  .hbd.on{opacity:1;transform:none}
+
+  /* photo deck */
+  .deck{position:relative;width:min(290px,76vw);aspect-ratio:3/4.3;margin-top:10px}
+  .pc{position:absolute;inset:0;background:#fff;border-radius:18px;padding:10px 10px 0;box-shadow:0 18px 40px rgba(0,0,0,.25);transition:transform .6s cubic-bezier(.3,1.3,.5,1), opacity .5s}
+  .pc img{width:100%;height:80%;object-fit:cover;border-radius:12px;display:block}
+  .pc p{color:var(--ink);font-family:'Caveat',cursive;font-size:clamp(20px,6vw,26px);line-height:1.05;padding:8px 4px}
+  .pc.gone{transform:translateX(130%) rotate(25deg)!important;opacity:0}
+
+  /* certificate */
+  .cert{background:var(--cream);color:var(--ink);border-radius:20px;padding:24px 20px;width:min(360px,90vw);box-shadow:0 20px 50px rgba(0,0,0,.25);position:relative;border:3px dashed #ffb3c7}
+  .cert h3{font-size:14px;letter-spacing:.25em;color:#d14b78}
+  .cert h2{font-family:'Caveat',cursive;font-size:44px;line-height:1;margin:6px 0 12px;color:#d14b78}
+  .cert ul{list-style:none;text-align:left;font-size:16px;line-height:1.5}
+  .cert li{padding:5px 0;border-bottom:1px dashed #f3cfd8;opacity:0;transform:translateX(-20px);transition:all .5s}
+  .cert li.in{opacity:1;transform:none}
+  .stamp{position:absolute;right:-8px;bottom:-14px;width:96px;height:96px;border-radius:50%;border:4px solid #e23b6d;color:#e23b6d;display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:13px;line-height:1.05;transform:rotate(-18deg) scale(3);opacity:0;background:rgba(255,250,245,.9);transition:all .35s cubic-bezier(.3,1.6,.5,1)}
+  .stamp.in{transform:rotate(-18deg) scale(1);opacity:1}
+
+  /* finale */
+  .balloon{position:fixed;bottom:-140px;font-size:58px;z-index:2;animation:bal linear forwards}
+  @keyframes bal{to{transform:translateY(-130vh) translateX(var(--dx))}}
+  .final .name{font-family:'Caveat',cursive;font-size:clamp(64px,19vw,110px);line-height:.95;animation:glow 2s ease-in-out infinite}
+  @keyframes glow{50%{text-shadow:0 0 30px rgba(255,255,255,.9)}}
+  .btn{margin-top:22px;background:#fff;color:#d14b78;border:0;border-radius:99px;padding:12px 26px;font:inherit;font-weight:800;font-size:17px;box-shadow:0 10px 25px rgba(0,0,0,.15);cursor:pointer}
+  .heart{font-size:84px;display:inline-block;animation:beat 1.1s infinite;cursor:pointer;margin-top:10px}
+  @keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.2)}30%{transform:scale(1)}45%{transform:scale(1.12)}}
 </style>
 </head>
 <body>
 <canvas id="fx"></canvas>
+<div class="floaty" id="floaty"></div>
+<div class="bars" id="bars"></div>
 
-<div id="intro">
-  <div class="gift">🎁</div>
-  <h1>for Elzumma</h1>
-  <p>tap anywhere to open</p>
+<!-- 0 -->
+<div class="scene" data-auto="0">
+  <div class="emoji p peek">👀</div>
+  <div class="big p">Psst…</div>
+  <div class="mid p">Elzumma.</div>
+  <div class="small p">yes you. the cute one.</div>
+</div>
+<!-- 1 -->
+<div class="scene">
+  <div class="emoji p">🤫</div>
+  <div class="mid p">Someone made you something.</div>
+  <div class="small p">it's top secret. like, government level.</div>
+</div>
+<!-- 2 -->
+<div class="scene">
+  <div class="emoji p shake">😤</div>
+  <div class="mid p">Rule #1: no angry face.</div>
+  <div class="small p">…okay you're already doing it.<br>it's fine. it's cute anyway.</div>
+</div>
+<!-- 3 loader -->
+<div class="scene" id="sLoad" data-lock="1">
+  <div class="emoji p spin">🎀</div>
+  <div class="mid p">Loading Elzukutta's surprise…</div>
+  <div class="p" style="width:100%">
+    <div class="loader"><b id="lbar"></b></div>
+    <div class="pct" id="lpct">0%</div>
+    <div class="err" id="lerr">⚠️ ERROR: cuteness level too high.<br><span style="font-weight:500">system overheating… retrying 🔥</span></div>
+  </div>
+</div>
+<!-- 4 scratch -->
+<div class="scene" id="sScratch" data-lock="1">
+  <div class="mid p">Scratch it. Gently. 🪄</div>
+  <div class="card p">
+    <img src="img/elza2.jpg" alt="Elza">
+    <canvas id="scratch"></canvas>
+  </div>
+  <div class="hbd" id="hbd">Happy Birthday! 🎉</div>
+</div>
+<!-- 5 deck -->
+<div class="scene" id="sDeck" data-lock="1">
+  <div class="mid p">Evidence collected today 📸</div>
+  <div class="small p" style="margin-bottom:8px">tap the photo</div>
+  <div class="deck p" id="deck">
+    <div class="pc"><img src="img/elza5.jpg" alt=""><p>Exhibit E: mirror said "wow" and meant it 🪞</p></div>
+    <div class="pc"><img src="img/elza4.jpg" alt=""><p>Exhibit D: hair flip so strong it caused traffic 🚗💨</p></div>
+    <div class="pc"><img src="img/elza3.jpg" alt=""><p>Exhibit C: pretending she's not posing. she is. 😌</p></div>
+    <div class="pc"><img src="img/elza1.jpg" alt=""><p>Exhibit B: the sky got jealous ☁️</p></div>
+    <div class="pc"><img src="img/elza2.jpg" alt=""><p>Exhibit A: illegal levels of smile 🚨</p></div>
+  </div>
+</div>
+<!-- 6 certificate -->
+<div class="scene" id="sCert" data-lock="1">
+  <div class="cert p">
+    <h3>OFFICIALLY CERTIFIED</h3>
+    <h2>Elzukutta</h2>
+    <ul id="certList">
+      <li>🏆 World's cutest angry face</li>
+      <li>💇‍♀️ New hairstyle every week champion</li>
+      <li>🔔 Anklet concert, live on every walk</li>
+      <li>💅 Red nail polish ambassador</li>
+      <li>🎂 Now one year more awesome</li>
+    </ul>
+    <div class="stamp" id="stamp">100%<br>CUTE<br>✓</div>
+  </div>
+</div>
+<!-- 7 final -->
+<div class="scene final" id="sFinal" data-lock="1">
+  <div class="mid p">Happy Birthday</div>
+  <div class="name p">Elzumma</div>
+  <div class="small p">stay cute. stay annoying-able. love you ❤️</div>
+  <div class="p"><div class="heart" id="heart">❤️</div></div>
+  <div class="p"><button class="btn" id="replay">watch again ↺</button></div>
 </div>
 
-<main>
-  <section class="hero">
-    <img src="img/elza2.jpg" alt="Elza">
-    <div class="hb">Happy Birthday</div>
-    <div class="nm">Elzukutta</div>
-    <div class="down">scroll ↓</div>
-  </section>
-
-  <p class="note r">Today the world got <b>one more year of you</b>. Lucky world.</p>
-  <figure class="photo r"><img src="img/elza1.jpg" alt="" loading="lazy"><figcaption>sunshine, but make it a person ☀️</figcaption></figure>
-
-  <p class="note r">Every little detail of you is <b>my favourite detail</b>.</p>
-  <figure class="photo r"><img src="img/elza4.jpg" alt="" loading="lazy"><figcaption>main character energy 💫</figcaption></figure>
-
-  <p class="note r">Happy mood, moody mood, any mood. <b>Still my favourite.</b></p>
-  <figure class="photo r"><img src="img/elza3.jpg" alt="" loading="lazy"><figcaption>don't look at me like that 🙈</figcaption></figure>
-
-  <p class="note r">May this year bring you <b>endless smiles</b> and all the good things you deserve.</p>
-  <figure class="photo r"><img src="img/elza5.jpg" alt="" loading="lazy"><figcaption>too pretty, not fair 😮‍💨</figcaption></figure>
-
-  <section class="end r">
-    <h2>Happy birthday,<br>my favourite girl</h2>
-    <p>love you, Elzumma</p>
-    <div class="heart" id="heart">❤️</div>
-  </section>
-</main>
+<div class="tap" id="tap">tap anywhere →</div>
 
 <script>
 (() => {
-  const cv = document.getElementById('fx'), cx = cv.getContext('2d');
-  let P = [], on = false;
-  const fit = () => { const d = devicePixelRatio || 1; cv.width = innerWidth*d; cv.height = innerHeight*d; cx.setTransform(d,0,0,d,0,0); };
-  fit(); addEventListener('resize', fit);
-  const C = ['#e0567a','#f7a8b8','#f3c6a5','#e8b86d','#ffffff'];
-  function burst(x, y, n = 120) {
-    for (let i = 0; i < n; i++) {
-      const a = Math.random()*6.28, v = 3 + Math.random()*8;
-      P.push({x, y, vx: Math.cos(a)*v, vy: Math.sin(a)*v - 4, r: Math.random()*6, vr: (Math.random()-.5)*.3, c: C[i%5], t: 0, m: 110 + Math.random()*60, h: Math.random() < .35});
-    }
-    if (!on) { on = true; requestAnimationFrame(tick); }
+  const $ = s => document.querySelector(s);
+  /* floating emoji */
+  const F = $('#floaty'), E = ['💖','✨','🎈','🌸','💕','⭐'];
+  for (let i = 0; i < 16; i++) { const s = document.createElement('span'); s.textContent = E[i % E.length];
+    s.style.cssText = `left:${Math.random()*100}vw;font-size:${16+Math.random()*20}px;animation-duration:${10+Math.random()*10}s;animation-delay:${-Math.random()*20}s`; F.appendChild(s); }
+
+  /* confetti */
+  const cv = $('#fx'), cx = cv.getContext('2d'); let P = [], run = false;
+  const fit = () => { const d = devicePixelRatio || 1; cv.width = innerWidth*d; cv.height = innerHeight*d; cx.setTransform(d,0,0,d,0,0); }; fit(); addEventListener('resize', fit);
+  const C = ['#fff','#ffe066','#ff6b9a','#b78cff','#7ee0c3','#ffb38a'];
+  function boom(x = innerWidth/2, y = innerHeight/2, n = 150) {
+    for (let i = 0; i < n; i++) { const a = Math.random()*6.28, v = 3 + Math.random()*10;
+      P.push({x, y, vx: Math.cos(a)*v, vy: Math.sin(a)*v - 5, r: Math.random()*6, vr: (Math.random()-.5)*.4, c: C[i % 6], t: 0, m: 120 + Math.random()*60, h: Math.random() < .3}); }
+    if (!run) { run = true; requestAnimationFrame(tick); }
   }
-  function tick() {
-    cx.clearRect(0,0,innerWidth,innerHeight);
-    P = P.filter(p => p.t < p.m);
-    for (const p of P) {
-      p.t++; p.vx *= .985; p.vy += .2; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+  function tick() { cx.clearRect(0,0,innerWidth,innerHeight); P = P.filter(p => p.t < p.m);
+    for (const p of P) { p.t++; p.vx *= .985; p.vy += .22; p.x += p.vx; p.y += p.vy; p.r += p.vr;
       cx.save(); cx.globalAlpha = 1 - p.t/p.m; cx.translate(p.x,p.y); cx.rotate(p.r); cx.fillStyle = p.c;
-      if (p.h) { cx.font = '14px serif'; cx.fillText('❤', -5, 5); } else cx.fillRect(-4,-3,8,6);
-      cx.restore();
-    }
-    if (P.length) requestAnimationFrame(tick); else { on = false; cx.clearRect(0,0,innerWidth,innerHeight); }
+      if (p.h) { cx.font = '16px serif'; cx.fillText('❤', -6, 6); } else cx.fillRect(-5,-3,10,6); cx.restore(); }
+    if (P.length) requestAnimationFrame(tick); else { run = false; cx.clearRect(0,0,innerWidth,innerHeight); } }
+
+  /* scenes */
+  const S = [...document.querySelectorAll('.scene')], bars = $('#bars'), tap = $('#tap');
+  S.forEach(() => bars.appendChild(Object.assign(document.createElement('i'), {innerHTML: '<b></b>'})));
+  let cur = -1, locked = false;
+  function go(n) {
+    if (n >= S.length) return;
+    S.forEach(s => s.classList.remove('on')); cur = n; S[n].classList.add('on');
+    [...bars.children].forEach((b, i) => b.classList.toggle('done', i <= n));
+    locked = !!S[n].dataset.lock; tap.style.display = locked ? 'none' : '';
+    const id = S[n].id; if (hooks[id]) hooks[id]();
   }
+  const unlock = (txt = 'tap anywhere →') => { locked = false; tap.textContent = txt; tap.style.display = ''; };
+  document.addEventListener('click', e => { if (locked || e.target.closest('button,.deck,.heart,.card')) return; go(cur + 1); });
 
-  document.getElementById('intro').addEventListener('click', e => {
-    e.currentTarget.classList.add('gone');
-    burst(innerWidth/2, innerHeight/2, 180);
-    setTimeout(() => burst(innerWidth*.2, innerHeight*.35, 80), 300);
-    setTimeout(() => burst(innerWidth*.8, innerHeight*.35, 80), 550);
-  });
-
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold: .2});
-  document.querySelectorAll('.r').forEach(el => io.observe(el));
-
-  const h = document.getElementById('heart');
-  h.addEventListener('click', () => { const b = h.getBoundingClientRect(); burst(b.left + b.width/2, b.top + b.height/2, 100); });
+  const hooks = {
+    sLoad() {
+      const bar = $('#lbar'), pct = $('#lpct'), err = $('#lerr'); let v = 0; err.classList.remove('on');
+      const t = setInterval(() => { v += v < 70 ? 3 : 1; if (v >= 99) { v = 99; clearInterval(t);
+          setTimeout(() => { err.classList.add('on'); }, 500);
+          setTimeout(() => { bar.style.width = '100%'; pct.textContent = '100% ✓ (barely survived)'; unlock(); }, 2600); }
+        bar.style.width = v + '%'; pct.textContent = v + '%'; }, 45);
+    },
+    sScratch() {
+      const c = $('#scratch'), hbd = $('#hbd'); hbd.classList.remove('on');
+      requestAnimationFrame(() => {
+        const r = c.getBoundingClientRect(), d = devicePixelRatio || 1; c.width = r.width*d; c.height = r.height*d;
+        const g = c.getContext('2d'); g.scale(d,d);
+        const gr = g.createLinearGradient(0,0,r.width,r.height); gr.addColorStop(0,'#ffd1e1'); gr.addColorStop(.5,'#e8d5ff'); gr.addColorStop(1,'#ffd9c2');
+        g.fillStyle = gr; g.fillRect(0,0,r.width,r.height);
+        g.font = '700 22px "Baloo 2", sans-serif'; g.fillStyle = '#d14b78'; g.textAlign = 'center';
+        g.fillText('🎁 scratch me 🎁', r.width/2, r.height/2); g.font = '500 14px "Baloo 2"'; g.fillText('(gently, she\'s precious)', r.width/2, r.height/2 + 26);
+        for (let i = 0; i < 40; i++) { g.fillText(['✨','💖','⭐'][i%3], Math.random()*r.width, Math.random()*r.height); }
+        g.globalCompositeOperation = 'destination-out';
+        let down = false, done = false, n = 0;
+        const pt = e => { const b = c.getBoundingClientRect(), t = e.touches ? e.touches[0] : e; return [t.clientX - b.left, t.clientY - b.top]; };
+        const draw = e => { if (!down || done) return; e.preventDefault(); const [x, y] = pt(e); g.beginPath(); g.arc(x, y, 26, 0, 7); g.fill();
+          if (++n % 12 === 0) { const data = g.getImageData(0, 0, c.width, c.height).data; let clear = 0; for (let i = 3; i < data.length; i += 64) if (!data[i]) clear++;
+            if (clear / (data.length / 64) > .45) reveal(); } };
+        function reveal() { if (done) return; done = true; c.style.transition = 'opacity .6s'; c.style.opacity = 0;
+          hbd.classList.add('on'); boom(innerWidth/2, innerHeight*.45, 220); setTimeout(() => boom(innerWidth*.2, innerHeight*.3, 90), 300); setTimeout(() => boom(innerWidth*.8, innerHeight*.3, 90), 600);
+          setTimeout(() => unlock(), 1800); }
+        c.onpointerdown = e => { down = true; draw(e); }; c.onpointermove = draw; addEventListener('pointerup', () => down = false);
+        c.addEventListener('touchmove', e => e.preventDefault(), {passive: false});
+      });
+    },
+    sDeck() {
+      const cards = [...document.querySelectorAll('.pc')]; let left = cards.length;
+      cards.forEach((c, i) => { c.classList.remove('gone'); c.style.transform = `rotate(${(i - 2) * 3}deg)`; });
+      $('#deck').onclick = () => { if (!left) return; left--; cards[left].classList.add('gone'); boom(innerWidth/2, innerHeight/2, 30);
+        if (!left) { setTimeout(() => { cards.forEach(c => c.classList.remove('gone')); left = cards.length; }, 700); unlock('tap outside the photo →'); } };
+    },
+    sCert() {
+      const li = [...document.querySelectorAll('#certList li')], st = $('#stamp'); li.forEach(l => l.classList.remove('in')); st.classList.remove('in');
+      li.forEach((l, i) => setTimeout(() => l.classList.add('in'), 700 + i * 450));
+      setTimeout(() => { st.classList.add('in'); const r = st.getBoundingClientRect(); boom(r.left + 48, r.top + 48, 80); unlock(); }, 700 + li.length * 450 + 300);
+    },
+    sFinal() {
+      boom(innerWidth/2, innerHeight/2, 250);
+      for (let i = 0; i < 14; i++) setTimeout(() => { const b = document.createElement('div'); b.className = 'balloon'; b.textContent = '🎈';
+        b.style.left = Math.random()*90 + 'vw'; b.style.setProperty('--dx', (Math.random()*80 - 40) + 'px'); b.style.animationDuration = 6 + Math.random()*4 + 's';
+        b.style.filter = `hue-rotate(${Math.random()*360}deg)`; document.body.appendChild(b); setTimeout(() => b.remove(), 11000); }, i * 250);
+    },
+  };
+  $('#heart').onclick = e => { const r = e.target.getBoundingClientRect(); boom(r.left + r.width/2, r.top + r.height/2, 120); };
+  $('#replay').onclick = () => go(0);
+  go(0);
 })();
 </script>
 </body>
