@@ -118,7 +118,7 @@
   .letter mark{background:linear-gradient(transparent 55%,rgba(255,143,171,.45) 55%);color:inherit;padding:0 2px}
 
   /* notice list */
-  .notice{width:100%;max-width:520px;margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .notice{width:100%;max-width:520px;margin-left:auto;margin-right:auto;margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:16px 12px;text-align:center;transition:transform .2s, background .3s;user-select:none}
   .chip .e{font-size:30px;display:block;margin-bottom:6px}
   .chip b{display:block;font-size:14px}
@@ -222,11 +222,11 @@
     <p class="lead reveal">Tap each one. (Yes, I notice all of them.)</p>
     <div class="notice reveal" id="notice">
       <div class="chip" data-k="nails"><span class="e">💅</span><b>Red nail polish</b><small></small></div>
-      <div class="chip" data-k="brows"><span class="e">✨</span><b>Your eyebrows</b><small></small></div>
-      <div class="chip" data-k="shoes"><span class="e">👡</span><b>Which shoes</b><small></small></div>
-      <div class="chip" data-k="band"><span class="e">🎀</span><b>Today's hair band</b><small></small></div>
-      <div class="chip" data-k="hair"><span class="e">💇‍♀️</span><b>Every new hairstyle</b><small></small></div>
-      <div class="chip" data-k="anklet"><span class="e">🔔</span><b>Your anklets</b><small></small></div>
+      <div class="chip" data-k="brows"><span class="e">✨</span><b>Thick eyebrows</b><small></small></div>
+      <div class="chip" data-k="shoes"><span class="e">👟</span><b>White shoes</b><small></small></div>
+      <div class="chip" data-k="band"><span class="e">🎀</span><b>Hair bands</b><small></small></div>
+      <div class="chip" data-k="hair"><span class="e">🦋</span><b>Butterfly hairstyle</b><small></small></div>
+      <div class="chip" data-k="anklet"><span class="e">🔔</span><b>Golden anklets</b><small></small></div>
     </div>
     <div class="count" id="count"></div>
   </section>
@@ -398,11 +398,11 @@
   /* ---------- notice chips ---------- */
   const lines = {
     nails: "Red. Always noticed. Always cute.",
-    brows: "Yes, I notice when you do them.",
-    shoes: "I know which pair you picked today.",
-    band: "Even the hair band. Every day.",
-    hair: "New hairstyle? I saw. I always see.",
-    anklet: "🎶 my favourite sound",
+    brows: "Those brows deserve their own fan page.",
+    shoes: "Always spotless. How?? 🤔",
+    band: "I know which one you picked today.",
+    hair: "Butterfly hair = instant heart attack 🦋",
+    anklet: "✨ golden jingle, my favourite sound",
   };
   const seen = new Set(), countEl = document.getElementById('count');
   document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
