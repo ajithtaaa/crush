@@ -2,455 +2,125 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cut">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>For Elzumma ❤️</title>
-<meta name="description" content="Something only for you. 🔒">
 <meta property="og:title" content="For Elzumma ❤️">
-<meta property="og:description" content="Something only for you. Unlock it 🔒">
-<meta name="theme-color" content="#2a1018">
+<meta property="og:description" content="Tap to open 🎁">
+<meta name="theme-color" content="#fff5f3">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#2a1018; --bg2:#4a1626; --rose:#e8456b; --rose-soft:#ff8fab; --peach:#f6c9a8;
-    --cream:#fff7ef; --ink:#3b1d22; --gold:#e9b872; --muted:#8a6a6f;
-  }
+  :root{--bg:#fff5f3;--ink:#4a2c2f;--rose:#e0567a;--soft:#f7d6d9;--muted:#9a7b7f}
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  body{
-    font-family:'Nunito',system-ui,sans-serif; color:var(--cream);
-    background:radial-gradient(120% 80% at 50% 0%, var(--bg2) 0%, var(--bg) 60%) fixed, var(--bg);
-    overflow-x:hidden; -webkit-tap-highlight-color:transparent;
-  }
-  button{font:inherit;cursor:pointer;border:0}
+  body{font-family:'Poppins',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;-webkit-tap-highlight-color:transparent}
   #fx{position:fixed;inset:0;pointer-events:none;z-index:50}
-  .hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
-  .hearts span{position:absolute;bottom:-40px;animation:rise linear infinite;opacity:.0}
-  @keyframes rise{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:.55}100%{transform:translateY(-110vh) rotate(40deg);opacity:0}}
 
-  /* ---------- LOCK ---------- */
-  #lock{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px 16px;z-index:10;transition:opacity .9s ease, transform .9s ease}
-  #lock.gone{opacity:0;transform:scale(1.08);pointer-events:none}
-  .lockcard{width:100%;max-width:380px;text-align:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
-    border-radius:28px;padding:34px 24px 28px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 30px 80px rgba(0,0,0,.35)}
-  .padlock{font-size:64px;display:inline-block;filter:drop-shadow(0 8px 20px rgba(232,69,107,.5));animation:bob 2.4s ease-in-out infinite}
-  @keyframes bob{50%{transform:translateY(-6px)}}
-  .lockcard h1{font-family:'Fraunces',serif;font-weight:600;font-size:26px;margin:14px 0 6px}
-  .lockcard p{color:#e9cfd4;font-size:15px;line-height:1.5}
-  .q{margin-top:22px;font-weight:700;font-size:16px;color:var(--peach)}
-  .field{margin-top:12px;display:flex;gap:8px}
-  .field input{flex:1;min-width:0;padding:14px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.25);color:#fff;font:inherit;font-size:16px;outline:none}
-  .field input:focus{border-color:var(--rose-soft)}
-  .field button{padding:0 18px;border-radius:14px;background:var(--rose);color:#fff;font-weight:700;font-size:20px}
-  .msg{min-height:44px;margin-top:12px;font-size:14px;color:#ffd3dc;line-height:1.45}
-  .shake{animation:shake .45s}
-  @keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
-  .hintbtn{background:none;color:#c9a3ab;font-size:13px;text-decoration:underline;margin-top:4px}
+  /* intro */
+  #intro{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:var(--bg);transition:opacity .8s, visibility .8s;cursor:pointer;padding:16px;text-align:center}
+  #intro.gone{opacity:0;visibility:hidden}
+  .gift{font-size:96px;animation:wiggle 1.6s ease-in-out infinite}
+  @keyframes wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-8deg)}40%{transform:rotate(8deg)}60%{transform:rotate(-4deg)}80%{transform:rotate(0)}}
+  #intro p{font-size:15px;color:var(--muted);letter-spacing:.08em}
+  #intro h1{font-family:'Dancing Script',cursive;font-size:42px;color:var(--rose)}
 
-  /* ---------- MAIN ---------- */
-  main{position:relative;z-index:1;display:none}
-  main.on{display:block}
-  section{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 16px;text-align:center;position:relative}
-  .reveal{opacity:0;transform:translateY(30px);transition:opacity 1s ease, transform 1s ease}
-  .reveal.in{opacity:1;transform:none}
+  main{max-width:520px;margin:0 auto;padding:0 16px 80px;text-align:center}
+  .hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 0}
+  .hero img{width:min(280px,72vw);aspect-ratio:3/4;object-fit:cover;object-position:50% 30%;border-radius:999px 999px 20px 20px;box-shadow:0 20px 50px rgba(224,86,122,.25)}
+  .hb{font-family:'Dancing Script',cursive;font-size:clamp(46px,13vw,72px);color:var(--rose);line-height:1;margin-top:26px}
+  .nm{font-size:20px;font-weight:300;letter-spacing:.2em;text-transform:uppercase;margin-top:10px}
+  .down{margin-top:34px;font-size:13px;color:var(--muted);animation:bob 2s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(6px)}}
 
-  .eyebrow{letter-spacing:.3em;text-transform:uppercase;font-size:12px;color:var(--peach);font-weight:700}
-  .script{font-family:'Dancing Script',cursive;font-weight:700}
-  .hero h2{font-family:'Dancing Script',cursive;font-size:clamp(52px,15vw,120px);line-height:1;margin:14px 0 4px;
-    background:linear-gradient(90deg,var(--peach),var(--rose-soft),var(--gold),var(--peach));background-size:300% 100%;
-    -webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
-  @keyframes shine{to{background-position:300% 0}}
-  .hero .name{font-family:'Fraunces',serif;font-size:clamp(28px,8vw,48px);font-style:italic}
-  .hero .sub{margin-top:18px;color:#e9cfd4;max-width:420px;line-height:1.6}
-  .heroimg{width:min(260px,62vw);aspect-ratio:3/4;border-radius:200px 200px 24px 24px;object-fit:cover;object-position:50% 30%;
-    border:4px solid rgba(255,255,255,.85);box-shadow:0 20px 60px rgba(232,69,107,.35);margin-bottom:22px}
-  .scroll{position:absolute;bottom:22px;font-size:13px;color:#c9a3ab;animation:bob 2s ease-in-out infinite}
+  .note{font-size:19px;font-weight:300;line-height:1.7;margin:70px auto;max-width:400px}
+  .note b{font-weight:500;color:var(--rose)}
+  .photo{margin:0 auto;width:min(340px,88vw)}
+  .photo img{width:100%;border-radius:18px;display:block;box-shadow:0 16px 40px rgba(74,44,47,.15)}
+  .photo figcaption{font-family:'Dancing Script',cursive;font-size:26px;color:var(--rose);margin-top:12px}
 
-  /* cake */
-  .cakewrap{position:relative;width:220px;height:230px;margin:26px auto 10px;cursor:pointer}
-  .plate{position:absolute;bottom:0;left:-10px;right:-10px;height:18px;border-radius:50%;background:#f1e3d6;box-shadow:0 8px 20px rgba(0,0,0,.3)}
-  .tier{position:absolute;left:50%;transform:translateX(-50%);border-radius:14px 14px 10px 10px}
-  .t1{bottom:10px;width:200px;height:80px;background:linear-gradient(#f7a6b9,#e8789a)}
-  .t2{bottom:86px;width:150px;height:64px;background:linear-gradient(#fff1e6,#f6d5c0)}
-  .drip{position:absolute;top:0;left:0;right:0;height:18px;background:radial-gradient(circle at 10px 0,#fff 10px,transparent 11px) 0 0/20px 18px repeat-x}
-  .t2 .drip{background:radial-gradient(circle at 10px 0,#e8456b 10px,transparent 11px) 0 0/20px 18px repeat-x}
-  .candle{position:absolute;bottom:148px;left:50%;transform:translateX(-50%);width:12px;height:46px;border-radius:4px;
-    background:repeating-linear-gradient(45deg,#fff 0 6px,#ff8fab 6px 12px)}
-  .flame{position:absolute;left:50%;top:-28px;width:16px;height:26px;margin-left:-8px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
-    background:radial-gradient(circle at 50% 70%,#fff 0 20%,#ffd76a 40%,#ff8a3d 75%,transparent 76%);animation:flick .12s infinite alternate;transform-origin:50% 100%;
-    box-shadow:0 0 30px 10px rgba(255,190,90,.45)}
-  @keyframes flick{to{transform:scale(.92,1.06) rotate(2deg)}}
-  .flame.out{animation:none;opacity:0;transition:opacity .4s}
-  .smoke{position:absolute;left:50%;top:-30px;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:rgba(220,220,220,.6);opacity:0}
-  .smoke.go{animation:smoke 1.6s ease-out forwards}
-  @keyframes smoke{0%{opacity:.7;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-70px) scale(4)}}
-  .pill{display:inline-block;margin-top:14px;padding:12px 22px;border-radius:999px;background:var(--rose);color:#fff;font-weight:700;box-shadow:0 10px 30px rgba(232,69,107,.4)}
-  .pill.ghost{background:rgba(255,255,255,.1);box-shadow:none;border:1px solid rgba(255,255,255,.2)}
-  .wish{min-height:52px;margin-top:14px;color:var(--peach);font-size:17px;max-width:360px;line-height:1.5}
+  .end{min-height:80svh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .end h2{font-family:'Dancing Script',cursive;font-size:clamp(40px,11vw,60px);color:var(--rose);line-height:1.1}
+  .end p{margin-top:14px;color:var(--muted);font-weight:300}
+  .heart{font-size:72px;margin-top:26px;cursor:pointer;animation:beat 1.2s infinite;user-select:none}
+  @keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.15)}30%{transform:scale(1)}45%{transform:scale(1.1)}}
 
-  /* envelope + letter */
-  .env{position:relative;width:min(320px,86vw);aspect-ratio:3/2;margin:28px auto 8px;cursor:pointer;perspective:800px}
-  .env .back{position:absolute;inset:0;background:#d9586f;border-radius:10px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
-  .env .front{position:absolute;inset:0;border-radius:10px;background:
-      linear-gradient(to top right,#e8697f 50%,transparent 50.5%) left/50.5% 100% no-repeat,
-      linear-gradient(to top left,#e8697f 50%,transparent 50.5%) right/50.5% 100% no-repeat;z-index:3}
-  .env .flap{position:absolute;left:0;right:0;top:0;height:62%;z-index:4;transform-origin:top;transition:transform .8s ease, z-index 0s .4s;
-      background:linear-gradient(to bottom,#c94a63,#b83f58);clip-path:polygon(0 0,100% 0,50% 100%)}
-  .env .seal{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);z-index:5;font-size:34px;transition:opacity .3s}
-  .env .paper{position:absolute;left:7%;right:7%;top:8%;bottom:6%;background:var(--cream);border-radius:6px;z-index:2;transition:transform .9s .5s ease;
-      display:flex;align-items:center;justify-content:center;color:var(--rose);font-family:'Dancing Script',cursive;font-size:28px}
-  .env.open .flap{transform:rotateX(180deg);z-index:1}
-  .env.open .seal{opacity:0}
-  .env.open .paper{transform:translateY(-55%)}
-
-  .letter{display:none;width:100%;max-width:560px;margin:0 auto;text-align:left;background:var(--cream);color:var(--ink);
-    border-radius:18px;padding:34px 24px 30px;box-shadow:0 30px 80px rgba(0,0,0,.4);position:relative;
-    background-image:repeating-linear-gradient(transparent 0 31px,rgba(232,69,107,.12) 31px 32px);}
-  .letter.on{display:block;animation:pop .7s ease}
-  @keyframes pop{from{opacity:0;transform:translateY(30px) scale(.97)}}
-  .letter h3{font-family:'Dancing Script',cursive;font-size:40px;color:var(--rose);margin-bottom:12px;line-height:1.1}
-  .letter p{font-family:'Fraunces',serif;font-size:17px;line-height:1.75;margin-bottom:16px;opacity:0;transform:translateY(10px);transition:opacity .8s, transform .8s}
-  .letter p.in{opacity:1;transform:none}
-  .letter .sign{font-family:'Dancing Script',cursive;font-size:30px;color:var(--rose);text-align:right;margin-top:6px}
-  .letter mark{background:linear-gradient(transparent 55%,rgba(255,143,171,.45) 55%);color:inherit;padding:0 2px}
-
-  /* notice list */
-  .notice{width:100%;max-width:520px;margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:16px 12px;text-align:center;transition:transform .2s, background .3s;user-select:none}
-  .chip .e{font-size:30px;display:block;margin-bottom:6px}
-  .chip b{display:block;font-size:14px}
-  .chip small{display:block;color:#d8b7be;font-size:12px;margin-top:4px;min-height:16px}
-  .chip.seen{background:rgba(232,69,107,.22);border-color:var(--rose-soft)}
-  .chip:active{transform:scale(.96)}
-  .count{margin-top:18px;color:var(--peach);font-size:15px;min-height:22px}
-
-  /* angry meter */
-  .angry{width:100%;max-width:420px;margin-top:22px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:24px 20px}
-  .face{font-size:84px;line-height:1;transition:transform .2s}
-  .angry input[type=range]{width:100%;margin:18px 0 8px;accent-color:var(--rose)}
-  .meterlabel{font-size:15px;color:#ffd3dc;min-height:44px;line-height:1.45}
-
-  /* gallery */
-  .gallery{display:flex;flex-wrap:wrap;justify-content:center;gap:22px 18px;max-width:900px;margin-top:30px}
-  .pol{background:#fff;padding:10px 10px 0;width:min(240px,42vw);box-shadow:0 18px 40px rgba(0,0,0,.4);border-radius:4px;transition:transform .35s ease;cursor:pointer}
-  .pol img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;background:#eee}
-  .pol figcaption{font-family:'Dancing Script',cursive;color:var(--ink);font-size:clamp(16px,4.2vw,21px);padding:8px 2px 12px;line-height:1.15}
-  .pol:nth-child(odd){transform:rotate(-3deg)}
-  .pol:nth-child(even){transform:rotate(3deg)}
-  .pol:hover,.pol:focus{transform:rotate(0) scale(1.04)}
-  .lightbox{position:fixed;inset:0;background:rgba(20,6,10,.92);display:none;align-items:center;justify-content:center;z-index:60;padding:16px;flex-direction:column}
-  .lightbox.on{display:flex}
-  .lightbox img{max-width:100%;max-height:78vh;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
-  .lightbox p{font-family:'Dancing Script',cursive;font-size:26px;margin-top:14px;color:var(--peach);text-align:center}
-
-  .finale h2{font-family:'Dancing Script',cursive;font-size:clamp(44px,12vw,88px);color:var(--rose-soft);line-height:1.05}
-  .finale p{margin-top:16px;color:#e9cfd4;font-size:17px;max-width:420px;line-height:1.6}
-  .bigheart{font-size:90px;animation:beat 1.1s ease-in-out infinite;cursor:pointer;display:inline-block;margin-top:20px}
-  @keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(1)}45%{transform:scale(1.12)}}
-  .foot{margin-top:28px;font-size:12px;color:#a7868c}
-  h4.sec{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(26px,7vw,38px);margin-top:10px}
-  .lead{color:#e9cfd4;max-width:440px;line-height:1.6;margin-top:10px}
-  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  .r{opacity:0;transform:translateY(24px);transition:opacity 1s ease,transform 1s ease}
+  .r.in{opacity:1;transform:none}
 </style>
 </head>
 <body>
 <canvas id="fx"></canvas>
-<div class="hearts" id="hearts"></div>
 
-<!-- ================= LOCK ================= -->
-<div id="lock">
-  <div class="lockcard" id="lockcard">
-    <div class="padlock" id="padlock">🔒</div>
-    <h1>This is only for one person.</h1>
-    <p>If you're not her, close this right now 🤨<br>If you are… prove it.</p>
-    <div class="q">What does he call you? 💭</div>
-    <form class="field" id="unlockForm" autocomplete="off">
-      <input id="pw" type="text" placeholder="type it here…" aria-label="Answer" autocapitalize="off" spellcheck="false">
-      <button type="submit" aria-label="Unlock">→</button>
-    </form>
-    <div class="msg" id="msg"></div>
-    <button class="hintbtn" id="hintBtn" type="button" style="display:none">need a hint?</button>
-  </div>
+<div id="intro">
+  <div class="gift">🎁</div>
+  <h1>for Elzumma</h1>
+  <p>tap anywhere to open</p>
 </div>
 
-<!-- ================= MAIN ================= -->
-<main id="main">
-
+<main>
   <section class="hero">
-    <img class="heroimg reveal" src="img/elza2.jpg" alt="Elza smiling">
-    <div class="eyebrow reveal">today is all about you</div>
-    <h2 class="reveal">Happy Birthday</h2>
-    <div class="name reveal">Elzumma ❤️</div>
-    <p class="sub reveal">Okay, I wanted to be the first one, so here I am at midnight being dramatic. Scroll slowly. I made this just for you.</p>
-    <div class="scroll">scroll ↓</div>
+    <img src="img/elza2.jpg" alt="Elza">
+    <div class="hb">Happy Birthday</div>
+    <div class="nm">Elzukutta</div>
+    <div class="down">scroll ↓</div>
   </section>
 
-  <section>
-    <div class="eyebrow reveal">step one</div>
-    <h4 class="sec reveal">Make a wish, Elzukutta</h4>
-    <p class="lead reveal">Close your eyes, think of something good, then tap the candle to blow it out 🕯️</p>
-    <div class="cakewrap reveal" id="cake" role="button" aria-label="Blow out the candle" tabindex="0">
-      <div class="plate"></div>
-      <div class="tier t1"><div class="drip"></div></div>
-      <div class="tier t2"><div class="drip"></div></div>
-      <div class="candle"><div class="flame" id="flame"></div><div class="smoke" id="smoke"></div></div>
-    </div>
-    <div class="wish" id="wish"></div>
-  </section>
+  <p class="note r">Another year of you being <b>the cutest person</b> I know. Not up for debate.</p>
+  <figure class="photo r"><img src="img/elza1.jpg" alt="" loading="lazy"><figcaption>red nails. noticed. always.</figcaption></figure>
 
-  <section>
-    <div class="eyebrow reveal">step two</div>
-    <h4 class="sec reveal">You've got a letter 💌</h4>
-    <p class="lead reveal">Tap the envelope.</p>
-    <div class="env reveal" id="env" role="button" aria-label="Open the letter" tabindex="0">
-      <div class="back"></div>
-      <div class="paper">for you ❤️</div>
-      <div class="front"></div>
-      <div class="flap"></div>
-      <div class="seal">💗</div>
-    </div>
-    <article class="letter" id="letter">
-      <h3>Happy birthday Elzumma ❤️</h3>
-      <p>Okay, I wanted to be the first one, so here I am at midnight being dramatic.</p>
-      <p>You honestly have no idea how cute you are. And I don't just mean your face (even though, yes, that too). I notice everything about you. Your <mark>red nail polish</mark>, your <mark>eyebrows</mark>, which <mark>shoes</mark> you're wearing, which <mark>hair band</mark> you picked that day, every time you try a <mark>new hairstyle</mark>, the sound of your <mark>anklets</mark> when you walk… you probably think I don't see these things, but I do. Every single time. And I love all of it.</p>
-      <p>Even when you're angry with me. Especially then, actually. That serious little face you make when you're mad is one of the cutest things ever, and I know you're going to be angry at me for saying that too 😌</p>
-      <p>You're the person I want to tell everything to first. And also the person I love annoying the most, and that's not changing just because you're a year older now.</p>
-      <p>I hope this year is really good to you, Elzukutta. Lots of happy days, lots of laughing, and fewer things to stress about. And please don't stop smiling like that, it's my favourite thing.</p>
-      <p>Happy birthday, my favourite girl. Love you ❤️</p>
-      <div class="sign">— yours, always</div>
-    </article>
-  </section>
+  <p class="note r">The anklets, the hair bands, the new hairstyles… <b>I see every little thing.</b></p>
+  <figure class="photo r"><img src="img/elza4.jpg" alt="" loading="lazy"><figcaption>new hair? yes, I saw 😌</figcaption></figure>
 
-  <section>
-    <div class="eyebrow reveal">step three</div>
-    <h4 class="sec reveal">Things you think I don't notice</h4>
-    <p class="lead reveal">Tap each one. (Yes, I notice all of them.)</p>
-    <div class="notice reveal" id="notice">
-      <div class="chip" data-k="nails"><span class="e">💅</span><b>Red nail polish</b><small></small></div>
-      <div class="chip" data-k="brows"><span class="e">✨</span><b>Your eyebrows</b><small></small></div>
-      <div class="chip" data-k="shoes"><span class="e">👡</span><b>Which shoes</b><small></small></div>
-      <div class="chip" data-k="band"><span class="e">🎀</span><b>Today's hair band</b><small></small></div>
-      <div class="chip" data-k="hair"><span class="e">💇‍♀️</span><b>Every new hairstyle</b><small></small></div>
-      <div class="chip" data-k="anklet"><span class="e">🔔</span><b>Your anklets</b><small></small></div>
-    </div>
-    <div class="count" id="count"></div>
-  </section>
+  <p class="note r">Even your angry face is cute. <b>Especially</b> your angry face.</p>
+  <figure class="photo r"><img src="img/elza3.jpg" alt="" loading="lazy"><figcaption>this exact look 😤❤️</figcaption></figure>
 
-  <section>
-    <div class="eyebrow reveal">step four</div>
-    <h4 class="sec reveal">The Elzu angry‑o‑meter</h4>
-    <p class="lead reveal">Slide it. Watch what happens to the cuteness.</p>
-    <div class="angry reveal">
-      <div class="face" id="face">😊</div>
-      <input type="range" id="anger" min="0" max="4" step="1" value="0" aria-label="Angry level">
-      <div class="meterlabel" id="meterlabel">Calm Elzu. Smiling. My favourite thing.</div>
-    </div>
-  </section>
+  <p class="note r">Wishing you a year full of laughing, happy days and <b>zero stress</b>.</p>
+  <figure class="photo r"><img src="img/elza5.jpg" alt="" loading="lazy"><figcaption>okay this one's just unfair</figcaption></figure>
 
-  <section>
-    <div class="eyebrow reveal">step five</div>
-    <h4 class="sec reveal">Exhibit A: proof you're unfair</h4>
-    <p class="lead reveal">Tap a photo.</p>
-    <div class="gallery" id="gallery">
-      <figure class="pol reveal" tabindex="0"><img src="img/elza1.jpg" alt="" loading="lazy"><figcaption>red nails, gold bangles, that laugh. noticed. 💅</figcaption></figure>
-      <figure class="pol reveal" tabindex="0"><img src="img/elza2.jpg" alt="" loading="lazy"><figcaption>this smile is literally my favourite thing</figcaption></figure>
-      <figure class="pol reveal" tabindex="0"><img src="img/elza3.jpg" alt="" loading="lazy"><figcaption>the serious face 😌 (cutest)</figcaption></figure>
-      <figure class="pol reveal" tabindex="0"><img src="img/elza4.jpg" alt="" loading="lazy"><figcaption>new hairstyle? yes, I noticed.</figcaption></figure>
-      <figure class="pol reveal" tabindex="0"><img src="img/elza5.jpg" alt="" loading="lazy"><figcaption>okay this one is just unfair</figcaption></figure>
-    </div>
-  </section>
-
-  <section class="finale">
-    <div class="eyebrow reveal">one last thing</div>
-    <h2 class="reveal">Happy birthday,<br>my favourite girl</h2>
-    <p class="reveal">You're a year older now, but I'm still going to annoy you exactly the same amount. Love you, Elzukutta ❤️</p>
-    <div class="bigheart reveal" id="bigheart" role="button" aria-label="Celebrate" tabindex="0">❤️</div>
-    <p class="foot">tap the heart as many times as you want</p>
+  <section class="end r">
+    <h2>Happy birthday,<br>my favourite girl</h2>
+    <p>love you, Elzumma</p>
+    <div class="heart" id="heart">❤️</div>
   </section>
 </main>
 
-<div class="lightbox" id="lightbox"><img id="lbimg" alt=""><p id="lbcap"></p></div>
-
 <script>
 (() => {
-  /* ---------- floating hearts ---------- */
-  const H = document.getElementById('hearts'), sym = ['❤','💗','💕','✨','💖'];
-  for (let i = 0; i < 18; i++) {
-    const s = document.createElement('span');
-    s.textContent = sym[i % sym.length];
-    s.style.left = Math.random() * 100 + 'vw';
-    s.style.fontSize = 12 + Math.random() * 18 + 'px';
-    s.style.animationDuration = 9 + Math.random() * 10 + 's';
-    s.style.animationDelay = -Math.random() * 18 + 's';
-    H.appendChild(s);
-  }
-
-  /* ---------- confetti ---------- */
   const cv = document.getElementById('fx'), cx = cv.getContext('2d');
-  let parts = [], running = false;
-  const fit = () => { const d = devicePixelRatio || 1; cv.width = innerWidth * d; cv.height = innerHeight * d; cx.setTransform(d,0,0,d,0,0); };
+  let P = [], on = false;
+  const fit = () => { const d = devicePixelRatio || 1; cv.width = innerWidth*d; cv.height = innerHeight*d; cx.setTransform(d,0,0,d,0,0); };
   fit(); addEventListener('resize', fit);
-  const cols = ['#ff8fab','#e8456b','#f6c9a8','#e9b872','#fff7ef','#ffd76a'];
-  function burst(x = innerWidth/2, y = innerHeight/2, n = 140, hearts = false) {
+  const C = ['#e0567a','#f7a8b8','#f3c6a5','#e8b86d','#ffffff'];
+  function burst(x, y, n = 120) {
     for (let i = 0; i < n; i++) {
-      const a = Math.random() * Math.PI * 2, v = 4 + Math.random() * 9;
-      parts.push({x, y, vx: Math.cos(a)*v, vy: Math.sin(a)*v - 5, g: .22 + Math.random()*.1, r: Math.random()*6.28, vr: (Math.random()-.5)*.3,
-        w: 6 + Math.random()*6, h: 4 + Math.random()*6, c: cols[i % cols.length], life: 0, max: 120 + Math.random()*60, heart: hearts && Math.random() < .5});
+      const a = Math.random()*6.28, v = 3 + Math.random()*8;
+      P.push({x, y, vx: Math.cos(a)*v, vy: Math.sin(a)*v - 4, r: Math.random()*6, vr: (Math.random()-.5)*.3, c: C[i%5], t: 0, m: 110 + Math.random()*60, h: Math.random() < .35});
     }
-    if (!running) { running = true; requestAnimationFrame(tick); }
+    if (!on) { on = true; requestAnimationFrame(tick); }
   }
   function tick() {
     cx.clearRect(0,0,innerWidth,innerHeight);
-    parts = parts.filter(p => p.life < p.max && p.y < innerHeight + 40);
-    for (const p of parts) {
-      p.life++; p.vx *= .985; p.vy += p.g; p.x += p.vx; p.y += p.vy; p.r += p.vr;
-      cx.save(); cx.globalAlpha = Math.max(0, 1 - p.life / p.max); cx.translate(p.x, p.y); cx.rotate(p.r); cx.fillStyle = p.c;
-      if (p.heart) { cx.font = '16px serif'; cx.fillText('❤', -6, 6); } else cx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+    P = P.filter(p => p.t < p.m);
+    for (const p of P) {
+      p.t++; p.vx *= .985; p.vy += .2; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+      cx.save(); cx.globalAlpha = 1 - p.t/p.m; cx.translate(p.x,p.y); cx.rotate(p.r); cx.fillStyle = p.c;
+      if (p.h) { cx.font = '14px serif'; cx.fillText('❤', -5, 5); } else cx.fillRect(-4,-3,8,6);
       cx.restore();
     }
-    if (parts.length) requestAnimationFrame(tick); else { running = false; cx.clearRect(0,0,innerWidth,innerHeight); }
+    if (P.length) requestAnimationFrame(tick); else { on = false; cx.clearRect(0,0,innerWidth,innerHeight); }
   }
 
-  /* ---------- sound (tiny synth, no files) ---------- */
-  let ac;
-  const audio = () => (ac ||= new (window.AudioContext || window.webkitAudioContext)());
-  function bell(freq, t0 = 0, dur = .6, vol = .12) {
-    const a = audio(), t = a.currentTime + t0, o = a.createOscillator(), g = a.createGain();
-    o.type = 'sine'; o.frequency.value = freq;
-    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
-    o.connect(g).connect(a.destination); o.start(t); o.stop(t + dur + .05);
-  }
-  function jingle() { // anklet chime
-    [2637, 3136, 2794, 3520, 2960, 3322, 2637, 3729].forEach((f, i) => bell(f + Math.random()*40, i * .055 + Math.random()*.02, .35, .05));
-  }
-  function happyBirthday() {
-    // C C D C F E | C C D C G F
-    const n = {C:523.25,D:587.33,E:659.25,F:698.46,G:783.99};
-    const seq = [['C',.0,.3],['C',.35,.2],['D',.6,.5],['C',1.15,.5],['F',1.7,.5],['E',2.25,.9],
-                 ['C',3.3,.3],['C',3.65,.2],['D',3.9,.5],['C',4.45,.5],['G',5.0,.5],['F',5.55,.9]];
-    seq.forEach(([k,t,d]) => { bell(n[k], t, d + .4, .1); bell(n[k]*2, t, d, .025); });
-  }
-
-  /* ---------- unlock ---------- */
-  const ok = ['elzukutta','elzumma','elzu','elza','elzuma','elzukuta'];
-  const wrong = [
-    "Nope. Are you even Elza? 🤨",
-    "Wrong. I'm judging you a little 😌",
-    "Still no. Think about what I call you every day…",
-    "Okay okay, tap the hint. I'll allow it.",
-  ];
-  let tries = 0;
-  const lockcard = document.getElementById('lockcard'), msg = document.getElementById('msg'), pw = document.getElementById('pw'), hintBtn = document.getElementById('hintBtn');
-  document.getElementById('unlockForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const v = pw.value.toLowerCase().replace(/[^a-z]/g, '');
-    if (!v) return;
-    if (ok.includes(v)) return unlock(v);
-    msg.textContent = wrong[Math.min(tries, wrong.length - 1)];
-    tries++;
-    if (tries >= 2) hintBtn.style.display = 'inline-block';
-    lockcard.classList.remove('shake'); void lockcard.offsetWidth; lockcard.classList.add('shake');
-  });
-  hintBtn.addEventListener('click', () => { msg.innerHTML = "It starts with <b>Elzu…</b> and ends with something cute 🥹"; });
-
-  function unlock(v) {
-    document.getElementById('padlock').textContent = '🔓';
-    msg.textContent = v === 'elza' ? "Elza?? So formal 😤 …fine, come in." : "Hi Elzumma 🥹 come in.";
-    try { audio().resume(); } catch {}
-    setTimeout(() => {
-      document.getElementById('lock').classList.add('gone');
-      document.getElementById('main').classList.add('on');
-      scrollTo(0,0);
-      observe();
-      burst(innerWidth/2, innerHeight*.4, 200, true);
-      setTimeout(() => burst(innerWidth*.2, innerHeight*.3, 90), 400);
-      setTimeout(() => burst(innerWidth*.8, innerHeight*.3, 90), 700);
-      try { happyBirthday(); } catch {}
-    }, 900);
-  }
-
-  /* ---------- reveal on scroll ---------- */
-  function observe() {
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold: .15});
-    document.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 120 + 'ms'; io.observe(el); });
-  }
-
-  /* ---------- cake ---------- */
-  const cake = document.getElementById('cake'), flame = document.getElementById('flame'), smoke = document.getElementById('smoke'), wish = document.getElementById('wish');
-  let blown = false;
-  function blow() {
-    if (blown) { flame.classList.remove('out'); smoke.classList.remove('go'); blown = false; wish.textContent = 'Lit again. Make another wish 😌'; return; }
-    blown = true; flame.classList.add('out'); smoke.classList.remove('go'); void smoke.offsetWidth; smoke.classList.add('go');
-    const r = cake.getBoundingClientRect(); burst(r.left + r.width/2, r.top + 20, 160, true);
-    try { happyBirthday(); } catch {}
-    wish.textContent = "Wish made ✨ I hope every single bit of it comes true, Elzukutta.";
-  }
-  cake.addEventListener('click', blow);
-  cake.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); blow(); } });
-
-  /* ---------- envelope ---------- */
-  const env = document.getElementById('env'), letter = document.getElementById('letter');
-  function openEnv() {
-    if (env.classList.contains('open')) return;
-    env.classList.add('open');
-    try { bell(880, 0, .4, .08); bell(1320, .12, .5, .06); } catch {}
-    setTimeout(() => {
-      env.style.display = 'none'; letter.classList.add('on');
-      letter.scrollIntoView({behavior: 'smooth', block: 'start'});
-      letter.querySelectorAll('p').forEach((p, i) => setTimeout(() => p.classList.add('in'), 400 + i * 900));
-    }, 1500);
-  }
-  env.addEventListener('click', openEnv);
-  env.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEnv(); } });
-
-  /* ---------- notice chips ---------- */
-  const lines = {
-    nails: "Red. Always noticed. Always cute.",
-    brows: "Yes, I notice when you do them.",
-    shoes: "I know which pair you picked today.",
-    band: "Even the hair band. Every day.",
-    hair: "New hairstyle? I saw. I always see.",
-    anklet: "🎶 my favourite sound",
-  };
-  const seen = new Set(), countEl = document.getElementById('count');
-  document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
-    const k = c.dataset.k;
-    c.classList.add('seen'); c.querySelector('small').textContent = lines[k];
-    try { k === 'anklet' ? jingle() : bell(1046 + seen.size * 120, 0, .35, .06); } catch {}
-    seen.add(k);
-    countEl.textContent = seen.size < 6 ? `${seen.size} / 6 noticed` : "6 / 6. Told you. I notice everything ❤️";
-    if (seen.size === 6 && !countEl.dataset.done) { countEl.dataset.done = 1; const r = countEl.getBoundingClientRect(); burst(innerWidth/2, r.top, 120, true); }
-  }));
-
-  /* ---------- angry meter ---------- */
-  const faces = [
-    ['😊', "Calm Elzu. Smiling. My favourite thing."],
-    ['😐', "Hmm. Slight eyebrow. Still very cute."],
-    ['😒', "That look. I know that look. Cuteness rising 📈"],
-    ['😤', "Serious little face activated. Dangerously cute."],
-    ['😠', "MAXIMUM ANGRY = MAXIMUM CUTE. (I know you're angry I said that 😌)"],
-  ];
-  const face = document.getElementById('face'), ml = document.getElementById('meterlabel'), anger = document.getElementById('anger');
-  anger.addEventListener('input', () => {
-    const [f, t] = faces[anger.value]; face.textContent = f; ml.textContent = t;
-    face.style.transform = `scale(${1 + anger.value * .08}) rotate(${anger.value % 2 ? -4 : 4}deg)`;
-    if (anger.value == 4) { const r = face.getBoundingClientRect(); burst(r.left + r.width/2, r.top + r.height/2, 60, true); }
+  document.getElementById('intro').addEventListener('click', e => {
+    e.currentTarget.classList.add('gone');
+    burst(innerWidth/2, innerHeight/2, 180);
+    setTimeout(() => burst(innerWidth*.2, innerHeight*.35, 80), 300);
+    setTimeout(() => burst(innerWidth*.8, innerHeight*.35, 80), 550);
   });
 
-  /* ---------- gallery lightbox ---------- */
-  const lb = document.getElementById('lightbox'), lbimg = document.getElementById('lbimg'), lbcap = document.getElementById('lbcap');
-  document.querySelectorAll('.pol').forEach(p => {
-    const open = () => { lbimg.src = p.querySelector('img').src; lbcap.textContent = p.querySelector('figcaption').textContent; lb.classList.add('on'); };
-    p.addEventListener('click', open);
-    p.addEventListener('keydown', e => { if (e.key === 'Enter') open(); });
-  });
-  lb.addEventListener('click', () => lb.classList.remove('on'));
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold: .2});
+  document.querySelectorAll('.r').forEach(el => io.observe(el));
 
-  /* ---------- finale heart ---------- */
-  const bh = document.getElementById('bigheart');
-  bh.addEventListener('click', () => { const r = bh.getBoundingClientRect(); burst(r.left + r.width/2, r.top + r.height/2, 120, true); try { bell(784,0,.5,.08); bell(1047,.1,.6,.06); } catch {} });
+  const h = document.getElementById('heart');
+  h.addEventListener('click', () => { const b = h.getBoundingClientRect(); burst(b.left + b.width/2, b.top + b.height/2, 100); });
 })();
 </script>
 </body>
