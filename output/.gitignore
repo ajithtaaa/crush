@@ -1,0 +1,4 @@
+# Rendered videos are too large for GitHub (>100 MB)
+*.mp4
+*.mov
+*.wav
